@@ -1,4 +1,5 @@
-import { Menu, Button, Text } from '@mantine/core';
+import { Menu, Button, Text, Avatar } from '@mantine/core';
+import avatarImage from '../../assets/Avatar.jpg';
 import {
   IconSettings,
   IconSearch,
@@ -12,9 +13,9 @@ const ProfileMenu = () => {
   return (
     <Menu shadow="md" width={200}>
       <Menu.Target>
-        <div className='flex item-center space-x-4'>
-          <span>Raj</span>
-          <Avatar src="avatar.png" alt="it's me" />
+        <div className='flex items-center gap-3 cursor-pointer'>
+          <span className='font-medium text-lg text-neutral-900 '>Raj</span>
+          <Avatar src={avatarImage} size={50} alt="it's me" />
         </div>
       </Menu.Target>
 
