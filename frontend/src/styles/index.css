@@ -1,0 +1,7 @@
+@import './glassmorphism.css';
+@import './animations.css';
+@import './components.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
