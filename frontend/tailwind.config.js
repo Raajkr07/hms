@@ -3,6 +3,7 @@ const colors = require('tailwindcss/colors');
 
 module.exports = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  darkMode: 'class',
   theme: {
     extend: {
       fontFamily: {
@@ -11,6 +12,8 @@ module.exports = {
         heading: 'merriweather, serif',
       },
       colors: {
+        'dark': "#08090C",
+        'light': "#F0F3FB",
         cyan: colors.cyan,
         primary: {
           '50': '#f1fcfa',
@@ -37,9 +40,14 @@ module.exports = {
           '800': '#454545',
           '900': '#3d3d3d',
           '950': '#000000',
+          '950': '#08090C'
         },
+        'custom-dark': '#08090C',
       },
     },
   },
   plugins: [],
+  corePlugins: {
+    preflight: false,
+  }
 };
