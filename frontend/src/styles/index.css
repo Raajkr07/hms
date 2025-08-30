@@ -5,3 +5,90 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* this is for removing default browser button behaviour */
+button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+/* added this for smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+*,
+*::before,
+*::after {
+  scroll-behavior: smooth;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto;
+  }
+}
+
+
+/* Dark mode body styles */
+html[data-mantine-color-scheme='dark'] {
+  color-scheme: dark;
+}
+
+html[data-mantine-color-scheme='dark'] body {
+  background-color: #1A1B1E;
+  color: #C1C2C5;
+}
+
+html[data-mantine-color-scheme='dark'] ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+html[data-mantine-color-scheme='dark'] ::-webkit-scrollbar-track {
+  background: #25262b;
+}
+
+html[data-mantine-color-scheme='dark'] ::-webkit-scrollbar-thumb {
+  background: #373A40;
+  border-radius: 4px;
+}
+
+html[data-mantine-color-scheme='dark'] ::-webkit-scrollbar-thumb:hover {
+  background: #5c5f66;
+}
+
+* {
+  transition: background-color 300ms ease, color 300ms ease, border-color 300ms ease;
+}
+/* till here is for dark mode */
+
+
+/* this is for login signup logo */
+@keyframes shine {
+  0% {
+    filter: brightness(1);
+    text-shadow: none;
+  }
+  50% {
+    filter: brightness(1.5);
+    text-shadow: 0 0 8px #1fad9f, 0 0 12px #32b9a9;
+  }
+  100% {
+    filter: brightness(1);
+    text-shadow: none;
+  }
+}
+.blinking-shine {
+  animation: shine 1.5s ease-in-out infinite;
+}
