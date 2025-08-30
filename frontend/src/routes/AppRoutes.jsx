@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import AdminDashboard from '../layouts/AdminDashboard';
 import LoginSignupPage from '../components/auth/LoginSignup';
 import IndexPage from '../components/landing/IndexPage';
+import DocumentationPage from '../components/landing/DocumentationPage';
 
 const Dashboard = () => <div className="p-6">Dashboard Page</div>;
 const Doctors = () => <div className="p-6">Doctors Page</div>;
@@ -27,9 +28,9 @@ const AppRoutes = () => {
         <Route path="appointments" element={<Appointments/>}/>
         <Route path="pharmacy" element={<Pharmacy/>}/>
       </Route>
+      <Route path="/documentation" element={<DocumentationPage />} />
 
       <Route path="*" element={<Navigate to="/" replace />} />
-      <Route path="07" element={<Navigate to="/" replace />} />
     </Routes>
   )
 }
