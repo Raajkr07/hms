@@ -50,24 +50,6 @@ html[data-mantine-color-scheme='dark'] body {
   color: #C1C2C5;
 }
 
-html[data-mantine-color-scheme='dark'] ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-html[data-mantine-color-scheme='dark'] ::-webkit-scrollbar-track {
-  background: #25262b;
-}
-
-html[data-mantine-color-scheme='dark'] ::-webkit-scrollbar-thumb {
-  background: #373A40;
-  border-radius: 4px;
-}
-
-html[data-mantine-color-scheme='dark'] ::-webkit-scrollbar-thumb:hover {
-  background: #5c5f66;
-}
-
 * {
   transition: background-color 300ms ease, color 300ms ease, border-color 300ms ease;
 }
@@ -91,4 +73,24 @@ html[data-mantine-color-scheme='dark'] ::-webkit-scrollbar-thumb:hover {
 }
 .blinking-shine {
   animation: shine 1.5s ease-in-out infinite;
+}
+
+/* this is for send button animation */
+@keyframes slowBlinkSlide {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  50% {
+    opacity: 0.4;
+    transform: translateX(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.slow-blink-slide {
+  animation: slowBlinkSlide 3s ease-in-out infinite;
 }
