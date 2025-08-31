@@ -18,9 +18,8 @@ const Header = ({ sidebarCollapsed, onToggleSidebar }) => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-40 h-[75px] flex justify-between items-center px-6 transition-all duration-300 ease-in-out ${
-        scrolled ? 'shadow-lg border-b border-neutral-200 dark:border-neutral-700' : ''
-      }`}
+      className={`fixed top-0 left-0 right-0 z-40 h-[70px] flex justify-between items-center px-6 transition-all duration-300 ease-in-out ${scrolled ? 'shadow-lg border-b border-neutral-200 dark:border-neutral-700' : ''
+        }`}
       style={{ backgroundColor: isDark ? '#08090C' : 'white' }}
       role="banner"
     >
@@ -35,7 +34,7 @@ const Header = ({ sidebarCollapsed, onToggleSidebar }) => {
           <input
             type="text"
             placeholder="Search patients, doctors, appointments..."
-            className="w-full pl-10 pr-4 py-2.5 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200 h-[42px]"
+            className="w-full pl-10 pr-4 py-2.5 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200 h-[40px]"
             style={{
               backgroundColor: isDark ? '#374151' : '#f5f5f5',
               borderColor: isDark ? '#4b5563' : '#d1d5db',
@@ -47,7 +46,7 @@ const Header = ({ sidebarCollapsed, onToggleSidebar }) => {
 
       <div className="flex gap-4 items-center ml-6">
         <Link to="/login" className="no-underline">
-          <button className="bg-primary-500 hover:bg-primary-600 text-white px-6 py-3 rounded-lg font-medium transition-all duration-200 text-sm shadow-md hover:shadow-lg hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2 h-[42px] flex items-center cursor-pointer no-underline">
+          <button className="bg-primary-500 hover:bg-primary-600 text-white px-5 py-2.5 rounded-lg font-medium transition-all duration-200 text-sm shadow-md hover:shadow-lg hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2 h-[42px] flex items-center cursor-pointer no-underline">
             Login
           </button>
         </Link>
@@ -60,7 +59,7 @@ const Header = ({ sidebarCollapsed, onToggleSidebar }) => {
             className="h-[42px] w-[42px] rounded-lg flex items-center justify-center cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors duration-200"
             style={{ backgroundColor: 'transparent' }}
           >
-            <IconBellRinging size={22} stroke={1.5} className="text-neutral-600 dark:text-neutral-400" />
+            <IconBellRinging size={20} stroke={1.5} className="text-neutral-600 dark:text-neutral-400" />
           </ActionIcon>
         </Indicator>
 
@@ -73,9 +72,9 @@ const Header = ({ sidebarCollapsed, onToggleSidebar }) => {
           style={{ backgroundColor: 'transparent' }}
         >
           {isDark ? (
-            <IconSun size={22} stroke={1.5} className="text-yellow-500" />
+            <IconSun size={20} stroke={1.5} className="text-yellow-500" />
           ) : (
-            <IconMoonStars size={22} stroke={1.5} className="text-blue-600" />
+            <IconMoonStars size={20} stroke={1.5} className="text-blue-600" />
           )}
         </ActionIcon>
 
