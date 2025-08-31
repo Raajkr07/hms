@@ -2,18 +2,13 @@ import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Header from '../components/header/Header';
 import Sidebar from '../components/sidebar/Sidebar';
-import DemoModal from '../components/ScrollModal';
-import UseScrollModal from '../hooks/UseScrollModal';
 
 const AdminDashboard = () => {
-  const { showModal, closeModal } = UseScrollModal();
   const [sidebarCollapsed, setSidebarCollapsed] = useState(true);
 
   const toggleSidebar = () => {
     setSidebarCollapsed(!sidebarCollapsed);
   };
-
-  console.log('AdminDashboard rendered, showModal:', showModal);
 
   return (
     <>
@@ -61,8 +56,6 @@ const AdminDashboard = () => {
           </div>
         </main>
       </div>
-      
-      <DemoModal opened={showModal} onClose={closeModal} />
     </>
   );
 };
