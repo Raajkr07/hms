@@ -1,7 +1,9 @@
 import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 import IndexPage from '../components/landing/IndexPage';
-import LoginSignupPage from '../components/auth/LoginSignup';
+import LoginPage from '../components/auth/LoginPage';
+import SignupPage from '../components/auth/SignupPage';
 import DocumentationPage from '../components/landing/DocumentationPage';
 import AdminDashboard from '../layouts/AdminDashboard';
 
@@ -22,8 +24,8 @@ const AppRoutes = () => {
     <Routes>
       <Route path="/" element={<IndexPage />} />
       <Route path="/documentation" element={<DocumentationPage />} />
-      <Route path="/login" element={isAuthenticated ? <Navigate to="/app" /> : <LoginSignupPage />} />
-      <Route path="/register" element={isAuthenticated ? <Navigate to="/app" /> : <LoginSignupPage />} />
+      <Route path="/login" element={isAuthenticated ? <Navigate to="/app" /> : <LoginPage />} />
+      <Route path="/signup" element={isAuthenticated ? <Navigate to="/app" /> : <SignupPage />} />
 
       <Route element={<PrivateRoute />}>
         <Route path="/app" element={<AdminDashboard />}>
