@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal, TextInput, Select, Button, ActionIcon, useMantineTheme } from '@mantine/core';
 import { IconX } from '@tabler/icons-react';
 
@@ -13,6 +13,15 @@ const ScrollModal = ({ opened, onClose }) => {
   });
 
   const [focusedField, setFocusedField] = useState(null);
+  useEffect(() => {
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape' && opened) {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [opened, onClose]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -46,6 +55,9 @@ const ScrollModal = ({ opened, onClose }) => {
       withCloseButton={false}
       centered
       size="45%"
+      trapFocus={true}
+      closeOnEscape={true}
+      closeOnClickOutside={true}
       overlayProps={{
         color: theme.colorScheme === 'dark' ? '#08090C' : '#000000',
         opacity: 0.3,
@@ -53,21 +65,25 @@ const ScrollModal = ({ opened, onClose }) => {
       }}
       styles={{
         content: {
+          maxWidth: '600px',
+          width: '90%',
+          maxHeight: '85vh',
+          overflowY: 'auto',
+          WebkitOverflowScrolling: 'touch',
           background:
             theme.colorScheme === 'dark'
               ? 'rgba(8, 9, 12, 0.85)'
               : 'rgba(255, 255, 255, 0.95)',
           backdropFilter: 'blur(20px)',
-          border: theme.colorScheme === 'dark' ? '1px solid rgba(255, 255, 255, 0.2)' : '1px solid #ccc',
           borderRadius: 20,
+          border: theme.colorScheme === 'dark' ? '1px solid rgba(255, 255, 255, 0.2)' : '1px solid #ccc',
           boxShadow: theme.shadows.xl,
-          maxHeight: '95vh',
-          overflowY: 'auto',
           transform: 'perspective(1000px) rotateX(5deg)',
-          animation: 'modalSlideIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+          animation: 'modalSlideIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+          padding: '2rem',
         },
         body: {
-          padding: '2rem',
+          padding: 0,
           color: theme.colorScheme === 'dark' ? '#e0e0e0' : '#000',
         },
       }}
