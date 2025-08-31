@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { IconRobot, IconX, IconSend } from '@tabler/icons-react';
 
-// Add this CSS string inside a <style> tag or include in your global CSS file
 const globalStyles = `
 textarea::-webkit-scrollbar {
   display: none;
@@ -36,7 +35,6 @@ const FloatingChatbot = () => {
   }, [open, messages]);
 
   useEffect(() => {
-    // Inject global styles for scrollbar removal and blinking animation if not already injected
     if (!document.getElementById('floating-chatbot-styles')) {
       const style = document.createElement('style');
       style.id = 'floating-chatbot-styles';
