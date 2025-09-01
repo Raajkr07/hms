@@ -43,7 +43,7 @@ export default function Footer() {
       role="contentinfo"
       className="
         w-full
-        h-[420px]
+        min-h-[420px] h-auto
         bg-white dark:bg-gray-900
         border-t border-gray-200 dark:border-gray-800
         mt-auto select-none
@@ -57,12 +57,12 @@ export default function Footer() {
         <div className="
           max-w-7xl mx-auto px-4 sm:px-6 lg:px-8
           h-full
-          grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-y-10 gap-x-12
+          grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-8 sm:gap-y-10 gap-x-6 sm:gap-x-8 lg:gap-x-12
           items-start
-          pt-12
+          pt-8 sm:pt-10 lg:pt-12 pb-4 sm:pb-6
         ">
           {/* Logo and About */}
-          <div aria-labelledby="footer-brand">
+          <div aria-labelledby="footer-brand" className="sm:col-span-2 lg:col-span-1">
             <div className="flex items-center mb-4">
               <LogoButton />
               <span className="sr-only">Go to home</span>
@@ -115,10 +115,10 @@ export default function Footer() {
           {/* Navigation Columns */}
           {footerLinks.map((section) => (
             <div key={section.title} aria-labelledby={`footer-section-${section.title}`}>
-              <h4 className="text-base font-semibold text-gray-900 dark:text-white mb-6">
+              <h4 className="text-base font-semibold text-gray-900 dark:text-white mb-4 sm:mb-6">
                 {section.title}
               </h4>
-              <ul className="space-y-4 pl-0 ml-0 list-none">
+              <ul className="space-y-3 sm:space-y-4 pl-0 ml-0 list-none">
                 {section.links.map((link) => (
                   <li key={link.href}>
                     <a
@@ -142,17 +142,19 @@ export default function Footer() {
       </div>
       {/* Bottom bar */}
       <div className="bg-gray-50 dark:bg-gray-950 border-t border-gray-200 dark:border-gray-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
-          <p className="text-gray-600 dark:text-gray-400 text-center md:text-left w-full md:w-auto" style={{ fontFamily: 'merriweather, serif' }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-5 flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4 text-sm">
+          <p className="text-gray-600 dark:text-gray-400 text-center sm:text-left w-full sm:w-auto" style={{ fontFamily: 'merriweather, serif' }}>
             &copy; {currentYear} HopeMeds.
           </p>
-          <nav className="flex space-x-5 text-gray-600 dark:text-gray-400">
-            <a href="/accessibility" className="hover:text-emerald-600 dark:hover:text-emerald-400 focus-visible:underline focus:underline focus:outline-none active:underline underline-offset-4 relative">
-              Accessibility
-            </a>
-            <a href="/sitemap" className="hover:text-emerald-600 dark:hover:text-emerald-400 focus-visible:underline focus:underline focus:outline-none active:underline underline-offset-4 relative">
-              Sitemap
-            </a>
+          <nav className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-5 text-gray-600 dark:text-gray-400">
+            <div className="flex space-x-4 sm:space-x-5">
+              <a href="/accessibility" className="hover:text-emerald-600 dark:hover:text-emerald-400 focus-visible:underline focus:underline focus:outline-none active:underline underline-offset-4 relative">
+                Accessibility
+              </a>
+              <a href="/sitemap" className="hover:text-emerald-600 dark:hover:text-emerald-400 focus-visible:underline focus:underline focus:outline-none active:underline underline-offset-4 relative">
+                Sitemap
+              </a>
+            </div>
             <span className="flex items-center" style={{ fontFamily: 'merriweather, serif' }}>
               Made with
               <Heart className="mx-1 w-4 h-4 text-red-500" />
