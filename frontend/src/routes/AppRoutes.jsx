@@ -5,7 +5,7 @@ import IndexPage from '../components/landing/IndexPage';
 import LoginPage from '../components/auth/LoginPage';
 import SignupPage from '../components/auth/SignupPage';
 import DocumentationPage from '../pages/DocumentationPage';
-import AdminDashboard from '../layouts/AdminDashboard';
+import AdminDashboard from '../layouts/admin/AdminDashboard';
 import AboutPage from '../pages/AboutPage';
 import HowItWorksPage from '../pages/HowItWorksPage';
 import ImpactPage from '../pages/ImpactPage';
@@ -27,7 +27,7 @@ const Patients = () => <div className="p-6">Patients Page</div>;
 const Appointments = () => <div className="p-6">Appointments Page</div>;
 const Pharmacy = () => <div className="p-6">Pharmacy Page</div>;
 
-const isAuthenticated = false;
+const isAuthenticated = true;
 
 const PrivateRoute = () => {
   return isAuthenticated ? <Outlet /> : <Navigate to="/login" replace />;
@@ -64,6 +64,9 @@ const AppRoutes = () => {
       {/* Authentication Routes */}
       <Route path="/login" element={isAuthenticated ? <Navigate to="/app" /> : <LoginPage />} />
       <Route path="/signup" element={isAuthenticated ? <Navigate to="/app" /> : <SignupPage />} />
+
+      {/* implement this with logic later */}
+      <Route path="/logout" element={<IndexPage />}/>
 
       {/* Protected Routes for authenticated person */}
       <Route element={<PrivateRoute />}>
