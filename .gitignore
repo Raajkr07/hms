@@ -21,9 +21,9 @@ backend/target/
 backend/build/
 
 # Environment files
-.env
-.env.local
-.env.*.local
+/frontend/.env
+/frontend.env.local
+/frontend.env.*.local
 
 # IDEs and editors
 .vscode/
