@@ -25,12 +25,12 @@ const UseScrollModal = () => {
       // Set timer to check after scroll stops
       scrollTimer = setTimeout(() => {
         const scrollDuration = (Date.now() - scrollStartTime) / 1000;
-        
+
         if (scrollDuration >= SHOW_AFTER_SECONDS) {
           setShowModal(true);
           setHasShown(true);
         }
-        
+
         // Reset timer for next scroll session
         scrollStartTime = null;
       }, 100);

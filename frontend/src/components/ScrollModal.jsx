@@ -76,11 +76,26 @@ const ScrollModal = ({ opened, onClose }) => {
               : 'rgba(255, 255, 255, 0.95)',
           backdropFilter: 'blur(20px)',
           borderRadius: 20,
-          border: theme.colorScheme === 'dark' ? '1px solid rgba(255, 255, 255, 0.2)' : '1px solid #ccc',
+          border:
+            theme.colorScheme === 'dark'
+              ? '1px solid rgba(255, 255, 255, 0.2)'
+              : '1px solid #ccc',
           boxShadow: theme.shadows.xl,
           transform: 'perspective(1000px) rotateX(5deg)',
           animation: 'modalSlideIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
           padding: '2rem',
+          '@media (max-width: 768px)': {
+            width: '95%',
+            maxWidth: '95%',
+            padding: '1.5rem',
+            borderRadius: 15,
+          },
+          '@media (max-width: 480px)': {
+            width: '100%',
+            maxWidth: '100%',
+            padding: '1rem',
+            borderRadius: 10,
+          },
         },
         body: {
           padding: 0,
@@ -103,6 +118,7 @@ const ScrollModal = ({ opened, onClose }) => {
           display: flex;
           flex-direction: column;
           gap: 2rem;
+          width: 100%;
         }
         .field-wrapper {
           position: relative;
@@ -143,6 +159,44 @@ const ScrollModal = ({ opened, onClose }) => {
           background: rgba(255, 255, 255, 0.25) !important;
           border-color: rgba(59, 130, 246, 0.7) !important;
           box-shadow: 0 0 25px rgba(59, 130, 246, 0.3) !important;
+        }
+
+        /* Responsive input and select styling */
+        .mantine-TextInput-input, .mantine-Select-input {
+          width: 100% !important;
+          min-width: 0;
+        }
+
+        /* Submit button responsiveness */
+        button[type="submit"] {
+          max-width: 100%;
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+
+        @media (max-width: 480px) {
+          /* Reduce gap on small screens */
+          .form-container {
+            gap: 1rem;
+          }
+
+          /* Smaller font size on inputs */
+          .mantine-TextInput-input, .mantine-Select-input {
+            font-size: 14px !important;
+            height: 42px !important;
+            padding: 10px 12px !important;
+          }
+
+          /* Smaller button height and font */
+          button[type="submit"] {
+            height: 48px !important;
+            font-size: 16px !important;
+          }
+
+          /* Adjust ActionIcon positioning on small screens */
+          .mantine-ActionIcon {
+            top: 12px !important;
+          }
         }
       `}</style>
 
