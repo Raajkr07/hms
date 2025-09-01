@@ -44,7 +44,7 @@ export default function Footer() {
       className="
         w-full
         min-h-[420px] h-auto
-        bg-white dark:bg-gray-900
+        bg-white dark:bg-black
         border-t border-gray-200 dark:border-gray-800
         mt-auto select-none
         flex flex-col justify-between
