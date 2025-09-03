@@ -20,7 +20,7 @@ const LandingHeader = ({ onLogoClick }) => {
       className={`fixed top-0 left-0 right-0 z-40 h-[60px] sm:h-[70px] flex justify-between items-center px-3 sm:px-6 transition-all duration-300 ease-in-out ${
         scrolled ? 'shadow-lg border-b border-neutral-200 dark:border-neutral-700' : ''
       }`}
-      style={{ backgroundColor: isDark ? '#08090C' : 'white' }}
+      style={{ backgroundColor: isDark ? '#000000' : 'white' }}
       role="banner"
     >
       <div className="flex items-center gap-3 sm:gap-6 flex-1 min-w-0">
