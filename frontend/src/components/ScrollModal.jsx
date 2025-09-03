@@ -49,60 +49,7 @@ const ScrollModal = ({ opened, onClose }) => {
   };
 
   return (
-    <Modal
-      opened={opened}
-      onClose={onClose}
-      withCloseButton={false}
-      centered
-      size="45%"
-      trapFocus={true}
-      closeOnEscape={true}
-      closeOnClickOutside={true}
-      overlayProps={{
-        color: theme.colorScheme === 'dark' ? '#08090C' : '#000000',
-        opacity: 0.3,
-        blur: 10,
-      }}
-      styles={{
-        content: {
-          maxWidth: '600px',
-          width: '90%',
-          maxHeight: '85vh',
-          overflowY: 'auto',
-          WebkitOverflowScrolling: 'touch',
-          background:
-            theme.colorScheme === 'dark'
-              ? 'rgba(8, 9, 12, 0.85)'
-              : 'rgba(255, 255, 255, 0.95)',
-          backdropFilter: 'blur(20px)',
-          borderRadius: 20,
-          border:
-            theme.colorScheme === 'dark'
-              ? '1px solid rgba(255, 255, 255, 0.2)'
-              : '1px solid #ccc',
-          boxShadow: theme.shadows.xl,
-          transform: 'perspective(1000px) rotateX(5deg)',
-          animation: 'modalSlideIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-          padding: '2rem',
-          '@media (max-width: 768px)': {
-            width: '95%',
-            maxWidth: '95%',
-            padding: '1.5rem',
-            borderRadius: 15,
-          },
-          '@media (max-width: 480px)': {
-            width: '100%',
-            maxWidth: '100%',
-            padding: '1rem',
-            borderRadius: 10,
-          },
-        },
-        body: {
-          padding: 0,
-          color: theme.colorScheme === 'dark' ? '#e0e0e0' : '#000',
-        },
-      }}
-    >
+    <>
       <style>{`
         @keyframes modalSlideIn {
           from {
@@ -160,172 +107,224 @@ const ScrollModal = ({ opened, onClose }) => {
           border-color: rgba(59, 130, 246, 0.7) !important;
           box-shadow: 0 0 25px rgba(59, 130, 246, 0.3) !important;
         }
-
         /* Responsive input and select styling */
         .mantine-TextInput-input, .mantine-Select-input {
           width: 100% !important;
           min-width: 0;
         }
-
         /* Submit button responsiveness */
         button[type="submit"] {
           max-width: 100%;
           padding-left: 1rem;
           padding-right: 1rem;
         }
-
-        @media (max-width: 480px) {
+        @media (max-width: 768px) {
+          .mantine-Modal-content {
+            width: 95% !important;
+            max-width: 95% !important;
+            padding: 1.5rem !important;
+            border-radius: 15px !important;
+          }
           /* Reduce gap on small screens */
           .form-container {
             gap: 1rem;
           }
-
           /* Smaller font size on inputs */
           .mantine-TextInput-input, .mantine-Select-input {
             font-size: 14px !important;
             height: 42px !important;
             padding: 10px 12px !important;
           }
-
           /* Smaller button height and font */
           button[type="submit"] {
             height: 48px !important;
             font-size: 16px !important;
           }
-
           /* Adjust ActionIcon positioning on small screens */
           .mantine-ActionIcon {
             top: 12px !important;
           }
         }
+        @media (max-width: 480px) {
+          .mantine-Modal-content {
+            width: 100% !important;
+            max-width: 100% !important;
+            padding: 1rem !important;
+            border-radius: 10px !important;
+          }
+        }
       `}</style>
 
-      {/* Close icons */}
-      <ActionIcon
-        onClick={onClose}
-        style={{
-          position: 'absolute',
-          top: 16,
-          left: 16,
-          zIndex: 1000,
-          background: 'rgba(239, 68, 68, 0.8)',
-          backdropFilter: 'blur(10px)',
-          border: '1px solid rgba(255, 255, 255, 0.3)',
+      <Modal
+        opened={opened}
+        onClose={onClose}
+        withCloseButton={false}
+        centered
+        size="45%"
+        trapFocus={true}
+        closeOnEscape={true}
+        closeOnClickOutside={true}
+        overlayProps={{
+          color: theme.colorScheme === 'dark' ? '#08090C' : '#000000',
+          opacity: 0.3,
+          blur: 10,
         }}
-        className="bg-gradient-to-r from-red-400 to-red-500 hover:from-red-500 hover:to-red-600 text-white rounded-full shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300"
-        size="lg"
-      >
-        <IconX size={18} />
-      </ActionIcon>
-
-      <ActionIcon
-        onClick={onClose}
-        style={{
-          position: 'absolute',
-          top: 16,
-          right: 16,
-          zIndex: 1000,
-          background: 'rgba(239, 68, 68, 0.8)',
-          backdropFilter: 'blur(10px)',
-          border: '1px solid rgba(255, 255, 255, 0.3)',
+        styles={{
+          content: {
+            maxWidth: '600px',
+            width: '90%',
+            maxHeight: '85vh',
+            overflowY: 'auto',
+            WebkitOverflowScrolling: 'touch',
+            background:
+              theme.colorScheme === 'dark'
+                ? 'rgba(8, 9, 12, 0.85)'
+                : 'rgba(255, 255, 255, 0.95)',
+            backdropFilter: 'blur(20px)',
+            borderRadius: 20,
+            border:
+              theme.colorScheme === 'dark'
+                ? '1px solid rgba(255, 255, 255, 0.2)'
+                : '1px solid #ccc',
+            boxShadow: theme.shadows.xl,
+            transform: 'perspective(1000px) rotateX(5deg)',
+            animation: 'modalSlideIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+            padding: '2rem',
+          },
+          body: {
+            padding: 0,
+            color: theme.colorScheme === 'dark' ? '#e0e0e0' : '#000',
+          },
         }}
-        className="bg-gradient-to-r from-red-400 to-red-500 hover:from-red-500 hover:to-red-600 text-white rounded-full shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300"
-        size="lg"
       >
-        <IconX size={18} />
-      </ActionIcon>
+        {/* Close icons */}
+        <ActionIcon
+          onClick={onClose}
+          style={{
+            position: 'absolute',
+            top: 16,
+            left: 16,
+            zIndex: 1000,
+            background: 'rgba(239, 68, 68, 0.8)',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(255, 255, 255, 0.3)',
+          }}
+          className="bg-gradient-to-r from-red-400 to-red-500 hover:from-red-500 hover:to-red-600 text-white rounded-full shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300"
+          size="lg"
+        >
+          <IconX size={18} />
+        </ActionIcon>
 
-      <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold bg-gradient-to-r from-teal-500 to-emerald-500 bg-clip-text text-transparent">
-          Request a Demo
-        </h2>
-        <div className="w-16 h-1 bg-gradient-to-r from-teal-400 to-emerald-400 mx-auto mt-2 rounded-full"></div>
-      </div>
+        <ActionIcon
+          onClick={onClose}
+          style={{
+            position: 'absolute',
+            top: 16,
+            right: 16,
+            zIndex: 1000,
+            background: 'rgba(239, 68, 68, 0.8)',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(255, 255, 255, 0.3)',
+          }}
+          className="bg-gradient-to-r from-red-400 to-red-500 hover:from-red-500 hover:to-red-600 text-white rounded-full shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300"
+          size="lg"
+        >
+          <IconX size={18} />
+        </ActionIcon>
 
-      <form onSubmit={handleSubmit} className={`form-container${focusedField ? ' dimmed' : ''}`}>
-        {['hospitalName', 'city', 'contactNo', 'personName'].map((field) => (
+        <div className="text-center mb-8">
+          <h2 className="text-3xl font-bold bg-gradient-to-r from-teal-500 to-emerald-500 bg-clip-text text-transparent">
+            Need medicine, We will provide it.
+          </h2>
+          <div className="w-16 h-1 bg-gradient-to-r from-teal-400 to-emerald-400 mx-auto mt-2 rounded-full"></div>
+        </div>
+
+        <form onSubmit={handleSubmit} className={`form-container${focusedField ? ' dimmed' : ''}`}>
+          {['hospitalName', 'city', 'contactNo', 'personName'].map((field) => (
+            <div
+              key={field}
+              className={`field-wrapper${focusedField === field ? ' pump' : ''}`}
+              onMouseEnter={() => setFocusedField(field)}
+              onMouseLeave={() => setFocusedField(null)}
+            >
+              <label className="block text-sm font-medium text-gray-600 dark:text-gray-300 mb-2 transition-all duration-300">
+                {field === 'hospitalName' && 'Hospital Name:'}
+                {field === 'city' && 'City:'}
+                {field === 'contactNo' && 'Contact No:'}
+                {field === 'personName' && 'Person Name:'}
+              </label>
+              <TextInput
+                placeholder={`Enter ${
+                  field === 'contactNo'
+                    ? 'Contact Number'
+                    : field === 'personName'
+                    ? 'Your Name'
+                    : field.charAt(0).toUpperCase() + field.slice(1)
+                }`}
+                value={formData[field]}
+                onFocus={() => setFocusedField(field)}
+                onBlur={() => setFocusedField(null)}
+                onChange={(e) => setFormData({ ...formData, [field]: e.target.value })}
+                styles={inputStyles}
+              />
+            </div>
+          ))}
+
           <div
-            key={field}
-            className={`field-wrapper${focusedField === field ? ' pump' : ''}`}
-            onMouseEnter={() => setFocusedField(field)}
+            className={`field-wrapper${focusedField === 'jobRole' ? ' pump' : ''}`}
+            onMouseEnter={() => setFocusedField('jobRole')}
             onMouseLeave={() => setFocusedField(null)}
           >
             <label className="block text-sm font-medium text-gray-600 dark:text-gray-300 mb-2 transition-all duration-300">
-              {field === 'hospitalName' && 'Hospital Name:'}
-              {field === 'city' && 'City:'}
-              {field === 'contactNo' && 'Contact No:'}
-              {field === 'personName' && 'Person Name:'}
+              Job Role:
             </label>
-            <TextInput
-              placeholder={`Enter ${
-                field === 'contactNo'
-                  ? 'Contact Number'
-                  : field === 'personName'
-                  ? 'Your Name'
-                  : field.charAt(0).toUpperCase() + field.slice(1)
-              }`}
-              value={formData[field]}
-              onFocus={() => setFocusedField(field)}
+            <Select
+              placeholder="Select Job Role"
+              data={[
+                { value: 'doctor', label: 'Doctor' },
+                { value: 'manager', label: 'Hospital Manager' },
+                { value: 'nurse', label: 'Nurse' },
+                { value: 'driver', label: 'Driver' },
+                { value: 'teacher', label: 'Teacher' },
+                { value: 'technician', label: 'Technician' },
+                { value: 'student', label: 'Student' },
+                { value: 'govt', label: 'Goverment employee' },
+                { value: 'other', label: 'Other' },
+              ]}
+              value={formData.jobRole}
+              onFocus={() => setFocusedField('jobRole')}
               onBlur={() => setFocusedField(null)}
-              onChange={(e) => setFormData({ ...formData, [field]: e.target.value })}
+              onChange={(value) => setFormData({ ...formData, jobRole: value })}
               styles={inputStyles}
             />
           </div>
-        ))}
 
-        <div
-          className={`field-wrapper${focusedField === 'jobRole' ? ' pump' : ''}`}
-          onMouseEnter={() => setFocusedField('jobRole')}
-          onMouseLeave={() => setFocusedField(null)}
-        >
-          <label className="block text-sm font-medium text-gray-600 dark:text-gray-300 mb-2 transition-all duration-300">
-            Job Role:
-          </label>
-          <Select
-            placeholder="Select Job Role"
-            data={[
-              { value: 'doctor', label: 'Doctor' },
-              { value: 'nurse', label: 'Nurse' },
-              { value: 'admin', label: 'Administrator' },
-              { value: 'manager', label: 'Hospital Manager' },
-              { value: 'technician', label: 'Technician' },
-              { value: 'student', label: 'Student' },
-              { value: 'govt', label: 'Govt. emp.' },
-              { value: 'other', label: 'Other' },
-            ]}
-            value={formData.jobRole}
-            onFocus={() => setFocusedField('jobRole')}
-            onBlur={() => setFocusedField(null)}
-            onChange={(value) => setFormData({ ...formData, jobRole: value })}
-            styles={inputStyles}
-          />
-        </div>
-
-        <Button
-          type="submit"
-          fullWidth
-          size="lg"
-          mt="xl"
-          styles={{
-            root: {
-              background: 'linear-gradient(135deg, #14B8A6 0%, #0D9488 100%)',
-              border: 'none',
-              borderRadius: 12,
-              height: 55,
-              fontSize: 18,
-              fontWeight: 600,
-              boxShadow: '0 10px 25px rgba(20, 184, 166, 0.3)',
-              '&:hover': {
-                transform: 'translateY(-2px)',
-                boxShadow: '0 15px 35px rgba(20, 184, 166, 0.4)',
+          <Button
+            type="submit"
+            fullWidth
+            size="lg"
+            mt="xl"
+            styles={{
+              root: {
+                background: 'linear-gradient(135deg, #14B8A6 0%, #0D9488 100%)',
+                border: 'none',
+                borderRadius: 12,
+                height: 55,
+                fontSize: 18,
+                fontWeight: 600,
+                boxShadow: '0 10px 25px rgba(20, 184, 166, 0.3)',
+                '&:hover': {
+                  transform: 'translateY(-2px)',
+                  boxShadow: '0 15px 35px rgba(20, 184, 166, 0.4)',
+                },
               },
-            },
-          }}
-        >
-          Submit Request
-        </Button>
-      </form>
-    </Modal>
+            }}
+          >
+            Submit Request
+          </Button>
+        </form>
+      </Modal>
+    </>
   );
 };
 
