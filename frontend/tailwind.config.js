@@ -12,7 +12,7 @@ module.exports = {
         heading: 'merriweather, serif',
       },
       colors: {
-        'dark': "#08090C",
+        'dark': "#000000",
         'light': "#F0F3FB",
         cyan: colors.cyan,
         primary: {
@@ -42,7 +42,7 @@ module.exports = {
           '950': '#000000',
           '950': '#08090C'
         },
-        'custom-dark': '#08090C',
+        'custom-dark': '#000000',
       },
     },
   },
