@@ -1,6 +1,6 @@
 import React from 'react';
 import { IconLayoutGridFilled, IconStethoscope, IconWheelchair, IconCalendarClock, IconMedicineSyrup } from '@tabler/icons-react';
-import avatarImage from '../../assets/Avatar.jpg';
+import avatarImage from '../../assets/man.jpg';
 import { Avatar } from '@mantine/core';
 import { NavLink } from 'react-router-dom';
 
