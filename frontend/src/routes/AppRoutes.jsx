@@ -9,7 +9,8 @@ import AdminDashboard from '../layouts/admin/AdminDashboard';
 import AboutPage from '../pages/AboutPage';
 import HowItWorksPage from '../pages/HowItWorksPage';
 import ImpactPage from '../pages/ImpactPage';
-import DonatePage from '../pages/donation/MoneyDonationPage';
+import MoneyDonationPage from '../pages/donation/MoneyDonationPage';
+import MedicineDonationPage from '../pages/donation/MedicineDonationPage';
 import ContactPage from '../pages/ContactPage';
 import FAQPage from '../pages/FAQPage';
 import SafetyPage from '../pages/SafetyPage';
@@ -45,7 +46,8 @@ const AppRoutes = () => {
       <Route path="/about" element={<AboutPage />} />
       <Route path="/how-it-works" element={<HowItWorksPage />} />
       <Route path="/impact" element={<ImpactPage />} />
-      <Route path="/donate" element={<DonatePage />} />
+      <Route path="/money" element={<MoneyDonationPage />} />
+      <Route path="/medicine" element={<MedicineDonationPage />} />
 
       {/* Resources Section Routes */}
       <Route path="/documentation" element={<DocumentationPage />} />
