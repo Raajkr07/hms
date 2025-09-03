@@ -9,8 +9,11 @@ import ScrollToTop from '../common/ScrollTop';
 import StatsSection from './status/StatsSection'
 import ThreeChartCarousel from './charts/ThreeChartCarousel';
 import NewsSection from './news/NwesSection';
-import ImageQueue from '../../components/landing/images/ImageQueue'
+import AnimatedImageGrid from '../../components/landing/images/AnimatedImageGrid'
 import { images } from '../../data/Data';
+import Testimonials from './testimonials/SaviourCard'
+import { testimonialsData } from '../../data/Data';
+import Button from './button/button';
 
 const IndexPage = () => {
   const { showModal, closeModal } = UseScrollModal();
@@ -22,7 +25,7 @@ const IndexPage = () => {
   };
 
   return (
-    <div className="dark:bg-[#000000] min-h-screen flex flex-col">
+    <div className="dark:bg-black min-h-screen flex flex-col">
 
       <ScrollToTop scrollContainerRef={mainRef} />
       <LandingHeader onLogoClick={scrollToHero} />
@@ -31,12 +34,10 @@ const IndexPage = () => {
           <HeroSection />
         </div>
         <StatsSection/>
-        <ThreeChartCarousel />
-
-        <ImageQueue images={images} height={160} speed={10} />
-
+        <ThreeChartCarousel /> 
+        <Testimonials testimonials={testimonialsData} />
+        <Button/>
         <NewsSection />
-
         <Footer />
       </main>
       <ScrollModal opened={showModal} onClose={closeModal} />
