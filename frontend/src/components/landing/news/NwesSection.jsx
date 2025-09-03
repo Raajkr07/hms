@@ -62,13 +62,13 @@ export default function NewsSection() {
   if (error) return <p className="text-center text-red-500">Error: {error}</p>;
 
   return (
-    <section className="mb-24 max-w-4xl mx-auto">
+    <section className="mb-8 max-w-4xl mx-auto">
       <h2 className="text-3xl font-bold mb-6 text-primary-600">Latest News & Updates</h2>
       {articles.length === 0 && <p>No news found for your query.</p>}
       {articles.slice(0, 4).map((article, index) => (
         <article
           key={index}
-          className="bg-white dark:bg-gray-800 rounded-lg p-6 mb-8 shadow hover:shadow-lg transition-shadow duration-300"
+          className="bg-white dark:bg-black rounded-lg p-6 mb-8 shadow hover:shadow-lg transition-shadow duration-300"
         >
           <h3 className="text-xl font-semibold mb-2">{article.title}</h3>
           <div
