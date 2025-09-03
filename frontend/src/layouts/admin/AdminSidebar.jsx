@@ -13,7 +13,7 @@ import {
   IconSettings,
 } from '@tabler/icons-react';
 
-import avatarImage from '../../assets/Avatar.jpg';
+import avatarImage from '../../assets/man.png';
 import { Avatar } from '@mantine/core';
 import { NavLink } from 'react-router-dom';
 
@@ -40,12 +40,11 @@ const Sidebar = ({ collapsed, onMouseEnter, onMouseLeave, onScroll, freezeScroll
     }
   };
 
-  // Inline styles to hide scrollbar
   const scrollableStyles = {
     overflowY: freezeScroll ? 'hidden' : 'auto',
-    scrollbarWidth: 'none', /* Firefox */
-    msOverflowStyle: 'none', /* Internet Explorer 10+ */
-    WebkitScrollbar: { display: 'none' } /* Webkit browsers */
+    scrollbarWidth: 'none',
+    msOverflowStyle: 'none',
+    WebkitScrollbar: { display: 'none' }
   };
 
   return (
@@ -94,7 +93,7 @@ const Sidebar = ({ collapsed, onMouseEnter, onMouseLeave, onScroll, freezeScroll
           )}
         </div>
 
-        <nav className={`flex flex-col gap-1 flex-1 overflow-y-auto ${collapsed ? 'px-2' : 'px-4'}`}>
+        <nav className={`flex flex-col gap-1 flex-1 ${collapsed ? 'px-2' : 'px-4'}`}>
           {links.map((link) => (
             <NavLink
               to={link.url}
