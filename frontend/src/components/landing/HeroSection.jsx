@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import heroImagelight from '../../assets/medicine-recycle-light.png';
-import heroImagedark from '../../assets/medicine-recycle-dark.png';
+import heroImagetint from '../../assets/hero-section1.png';
+import heroImageblack from '../../assets/medicine-recycle-light.png';
 import { HeartbeatLine } from '../HeartBeatLine';
 
 export default function HeroSection() {
@@ -11,8 +11,8 @@ export default function HeroSection() {
   };
 
   return (
-    <div className="overflow-x-hidden"> {/* Prevent horizontal overflow */}
-      <section className="max-w-7xl mx-auto pt-16 pb-20 px-6 relative">
+    <div className="overflow-x-hidden">
+      <section className="max-w-7xl mx-auto pt-12 pb-4 px-6 relative">
         <div className="flex flex-col md:flex-row items-center gap-12">
           <div className="md:flex-1 text-center md:text-left">
             <h1 className="text-6xl font-extrabold text-primary-600 mb-6">
@@ -24,7 +24,7 @@ export default function HeroSection() {
           </div>
           <div className="md:flex-1">
             <img
-              src={isDarkMode ? heroImagedark : heroImagelight}
+              src={isDarkMode ? heroImageblack : heroImagetint}
               alt="Medicine Waste Reduction Illustration"
               className="w-full max-w-md mx-auto cursor-pointer border-4 border-blue-500"
               onClick={toggleMode}
