@@ -12,7 +12,7 @@ const footerLinks = [
       { label: "About HopeMeds", href: "/about" },
       { label: "How it Works", href: "/how-it-works" },
       { label: "Impact & Results", href: "/impact" },
-      { label: "Donate Medicines", href: "/donate" },
+      { label: "Donate", href: "/donate" },
     ],
   },
   {
@@ -158,7 +158,7 @@ export default function Footer() {
             <span className="flex items-center" style={{ fontFamily: 'merriweather, serif' }}>
               Made with
               <Heart className="mx-1 w-4 h-4 text-red-500" />
-              for healthcare
+              for people
             </span>
           </nav>
         </div>
