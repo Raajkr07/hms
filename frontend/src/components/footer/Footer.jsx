@@ -157,7 +157,7 @@ export default function Footer() {
             </div>
             <span className="flex items-center" style={{ fontFamily: 'merriweather, serif' }}>
               Made with
-              <Heart className="mx-1 w-4 h-4 text-red-500" />
+              <Heart className="mx-1 w-4 h-4 text-red-500 fill-red-500 " />
               for people
             </span>
           </nav>
