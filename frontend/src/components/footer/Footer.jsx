@@ -12,7 +12,7 @@ const footerLinks = [
       { label: "About HopeMeds", href: "/about" },
       { label: "How it Works", href: "/how-it-works" },
       { label: "Impact & Results", href: "/impact" },
-      { label: "Donate", href: "/donate" },
+      { label: "Donate", href: "/money" },
     ],
   },
   {
