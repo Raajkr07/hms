@@ -1,10 +1,8 @@
-// LoginPage.jsx
 import React, { useState, useEffect } from 'react';
 import { Eye, EyeOff, User, Mail, Lock, Shield, Stethoscope, Heart } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { IconHeartbeat } from '@tabler/icons-react';
 
-// Utility functions for validation
 const validateEmail = (email) => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
@@ -117,17 +115,15 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-teal-600 via-teal-700 to-emerald-800 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-primary-600 via-primary-700 to-primary-800 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-black opacity-10"></div>
       <div className="absolute top-20 right-20 w-64 h-64 bg-white opacity-5 rounded-full"></div>
       <div className="absolute bottom-32 left-10 w-32 h-32 bg-white opacity-5 rounded-full"></div>
-      <div className="absolute top-1/2 left-1/4 w-40 h-40 bg-teal-700 opacity-3 rounded-full"></div>
+      <div className="absolute top-1/2 left-1/4 w-40 h-40 bg-primary-700 opacity-3 rounded-full"></div>
 
       <div className="relative z-10 min-h-screen flex">
-        {/* Left Side - Brand/Hero */}
-        <div className="flex-1 p-8 flex flex-col justify-between">
-          {/* Logo */}
+        <div className="flex-1 pt-4 pl-6 flex flex-col justify-between">
           <div className="flex gap-2 items-center blinking-shine">
             <IconHeartbeat size={40} stroke={2.5} className="text-primary-200" />
             <span className="font-heading text-3xl font-semibold text-primary-200">HopeMeds</span>
@@ -158,17 +154,15 @@ export default function LoginPage() {
           <div className="text-teal-200 text-sm">© 2025 HopeMeds. Fighting medicine wastage together.</div>
         </div>
 
-        {/* Right Side - Form Container */}
         <div className="w-[600px] flex items-center justify-center py-8 px-8 relative z-20">
           <div className="w-full bg-white rounded-3xl shadow-2xl p-8 max-h-[calc(100vh-64px)] overflow-y-auto scrollbar-hide">
-            {/* Form Header */}
+           
             <div className="text-center mb-6">
-              <h2 className="text-3xl font-bold text-gray-800 mb-2">Welcome Back</h2>
+              <h2 className="text-3xl font-extrabold text-primary-400 mb-2">Welcome Back</h2>
               <h3 className="text-xl font-medium text-gray-600 mb-4">Sign in to your account</h3>
               <p className="text-gray-500 text-sm">Enter your credentials to continue</p>
             </div>
 
-            {/* Error Message */}
             {errors.submit && (
               <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">{errors.submit}</div>
             )}
@@ -234,7 +228,7 @@ export default function LoginPage() {
                   type="button"
                   onClick={(e) => {
                     e.preventDefault();
-                    alert('Forgot password functionality will be implemented here');
+                    navigate('/forgot-password');
                   }}
                   className="text-teal-600 hover:text-teal-700 font-medium cursor-pointer"
                 >
