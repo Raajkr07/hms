@@ -8,7 +8,7 @@ export function HeartbeatLine() {
       className="relative w-full"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      style={{ minHeight: '60px' }}
+      style={{ minHeight: '65px' }}
     >
       <svg
         className="block w-full h-16"
