@@ -46,12 +46,13 @@ html[data-mantine-color-scheme='dark'] {
 }
 
 html[data-mantine-color-scheme='dark'] body {
-  background-color: #1A1B1E;
+  background-color: #000000;
   color: #C1C2C5;
 }
 
-* {
-  transition: background-color 300ms ease, color 300ms ease, border-color 300ms ease;
+body {
+  background-color: #000000;
+  color: #C1C2C5;
 }
 /* till here is for dark mode */
 
