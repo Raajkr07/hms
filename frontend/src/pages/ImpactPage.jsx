@@ -1,5 +1,5 @@
 import React from 'react';
-import { statsData } from '../data/Data';
+import { statsData } from '../data/StatsData';
 import LandingHeader from '../components/landing/LandingHeader';
 import Footer from '../components/footer/Footer';
 
