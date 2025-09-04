@@ -7,15 +7,51 @@ spring:
 
   datasource:
     url: jdbc:mysql://localhost:3306/hopemeds_auth
-    username: *
+    username: root
     password: *
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: false
+  mail:
+    host: smtp.example.com
+    port: 587
+    username: *
+    password: *
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: *
+            client-secret: *
+            scope: openid,profile,email
+            redirect-uri: "{baseUrl}/oauth2/callback/{registrationId}"
+            client-name: Google
+
+#          facebook:
+#            client-id: YOUR_FACEBOOK_CLIENT_ID
+#            client-secret: YOUR_FACEBOOK_CLIENT_SECRET
+#            scope: email,public_profile
+#            redirect-uri: "{baseUrl}/oauth2/callback/{registrationId}"
+#            client-name: Facebook
+#
+#          microsoft:
+#            client-id: YOUR_MICROSOFT_CLIENT_ID
+#            client-secret: YOUR_MICROSOFT_CLIENT_SECRET
+#            scope: openid,profile,email
+#            redirect-uri: "{baseUrl}/oauth2/callback/{registrationId}"
+#            client-name: Microsoft
 
 app:
-  jwtSecret: your-256-bit-secret-that-is-very-secure
+  jwtSecret: *
   jwtExpirationMs: 86400000 # 1 day in milliseconds
 
 logging:
