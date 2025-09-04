@@ -21,12 +21,19 @@ const theme = createTheme({
     from: "primary.4",
     to: "primary.8",
     deg: 132
-  }
+  },
+  darkColorScheme: {
+  colorScheme: 'dark',
+  colors: {
+    background: '#000000',
+    text: '#ffffff',
+  },
+}
 });
 
 function App() {
   return (
-    <MantineProvider theme={theme} defaultColorScheme="light">
+    <MantineProvider theme={theme} defaultColorScheme="dark">
       <BrowserRouter>
         <AppRoutes/>
         <FloatingChatbot />
