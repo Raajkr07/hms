@@ -17,6 +17,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(length = 36, updatable = false, nullable = false)
     private String id;
 
     @Column(nullable = false, unique = true)
@@ -34,6 +35,9 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
+
+    @Column(nullable = false)
+    private boolean emailVerified = false;
 
     // I will add other fields if needed in the future(like:- dateOfBirth, gender)
 }
