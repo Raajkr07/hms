@@ -2,6 +2,7 @@ package com.hopemeds.auth.config;
 
 import com.hopemeds.auth.security.CustomUserDetailsService;
 import com.hopemeds.auth.security.JwtAuthenticationFilter;
+import com.hopemeds.auth.security.RateLimitingFilter;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -39,6 +40,7 @@ public class SecurityConfig {
                 );
 
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(new RateLimitingFilter(), JwtAuthenticationFilter.class);
 
         return http.build();
     }
