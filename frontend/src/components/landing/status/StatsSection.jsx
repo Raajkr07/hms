@@ -1,4 +1,4 @@
-import { statsData } from '../../../data/Data';
+import { statsData } from '../../../data/StatsData';
 import StatsCard from './StatsCard';
 
 export default function StatsSection() {
