@@ -27,15 +27,21 @@ const TestimonialCard = ({ testimonial }) => {
   return (
     <article
       className="
-        group relative flex flex-col justify-between items-center py-6 px-4 sm:p-6 rounded-2xl shadow-lg h-[340px]
-        bg-white text-gray-900
-        dark:bg-[#202235] dark:text-gray-50
-        hover:scale-105 hover:shadow-2xl motion-reduce:transform-none
-        border-2 border-transparent transition-all duration-500
-        hover:border-primary-400
-        overflow-hidden
+    group relative flex flex-col justify-between items-center py-6 px-4 sm:p-6 rounded-2xl h-[340px]
+    bg-white/5 backdrop-blur-md
+    border border-teal-200/20
+    shadow-none
+    overflow-hidden
+    transition-all duration-700 ease-in-out
+    hover:bg-gradient-to-br dark:hover:from-[#481D1D] dark:hover:to-[#481D1D]
+    hover:border-teal-400 hover:border-2
+    hover:shadow-[0_0_20px_2px_rgba(13,148,136,0.2)_inset]
+    transform hover:scale-105
       "
-      style={{ fontFamily: "Poppins, sans-serif" }}
+      style={{
+        fontFamily: "Poppins, sans-serif",
+        transitionProperty: 'background, border-color, box-shadow, transform',
+      }}
       role="group"
       aria-label={`Testimonial from ${author}`}
     >
