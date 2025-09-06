@@ -1,8 +1,8 @@
 package com.hopemeds.auth.security;
 
-import com.github.bucket4j.Bandwidth;
-import com.github.bucket4j.Bucket;
-import com.github.bucket4j.Refill;
+import io.github.bucket4j.Bucket;
+import io.github.bucket4j.Refill;
+import io.github.bucket4j.Bandwidth;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

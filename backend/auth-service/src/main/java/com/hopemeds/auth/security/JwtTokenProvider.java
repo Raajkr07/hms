@@ -1,36 +1,42 @@
 package com.hopemeds.auth.security;
 
-
+import com.hopemeds.auth.config.JwtConfig;
 import io.jsonwebtoken.*;
-import org.springframework.beans.factory.annotation.Value;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
 
+import javax.crypto.SecretKey;
 import java.util.Date;
 
 @Component
 public class JwtTokenProvider {
 
-    @Value("${app.jwtSecret}")
-    private String jwtSecret;
+    private final JwtConfig jwtConfig;
 
-    @Value("${app.jwtExpirationMs}")
-    private int jwtExpirationMs;
+    public JwtTokenProvider(JwtConfig jwtConfig) {
+        this.jwtConfig = jwtConfig;
+    }
+
+    private SecretKey getSigningKey() {
+        return Keys.hmacShaKeyFor(jwtConfig.getJwtSecret().getBytes());
+    }
 
     public String generateToken(String userId) {
         Date now = new Date();
-        Date expiryDate = new Date(now.getTime() + jwtExpirationMs);
+        Date expiryDate = new Date(now.getTime() + jwtConfig.getJwtExpirationMs());
 
         return Jwts.builder()
                 .setSubject(userId)
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
-                .signWith(SignatureAlgorithm.HS512, jwtSecret)
+                .signWith(getSigningKey(), SignatureAlgorithm.HS512)
                 .compact();
     }
 
     public String getUserIdFromJWT(String token) {
-        Claims claims = Jwts.parser()
-                .setSigningKey(jwtSecret)
+        Claims claims = Jwts.parserBuilder()
+                .setSigningKey(getSigningKey())
+                .build()
                 .parseClaimsJws(token)
                 .getBody();
 
@@ -39,11 +45,15 @@ public class JwtTokenProvider {
 
     public boolean validateToken(String authToken) {
         try {
-            Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
+            Jwts.parserBuilder().setSigningKey(getSigningKey()).build().parseClaimsJws(authToken);
             return true;
         } catch (JwtException | IllegalArgumentException e) {
             System.err.println("Invalid JWT token: " + e.getMessage());
         }
         return false;
+    }
+
+    public long getJwtExpirationMs() {
+        return jwtConfig.getJwtExpirationMs();
     }
 }

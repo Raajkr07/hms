@@ -3,12 +3,16 @@ package com.hopemeds.auth.security;
 import com.hopemeds.auth.entity.Role;
 import com.hopemeds.auth.entity.User;
 import com.hopemeds.auth.repository.UserRepository;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
+import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -27,6 +31,9 @@ public class SocialOAuth2UserService extends DefaultOAuth2UserService {
 
         Map<String, Object> attributes = oAuth2User.getAttributes();
         String email = (String) attributes.get("email");
+        if (email == null || email.isEmpty()) {
+            throw new OAuth2AuthenticationException("Email not found from OAuth2 provider");
+        }
 
         User user = userRepository.findByEmail(email).orElseGet(() -> {
             User newUser = User.builder()
@@ -39,6 +46,14 @@ public class SocialOAuth2UserService extends DefaultOAuth2UserService {
             return userRepository.save(newUser);
         });
 
-        return oAuth2User;
+        List<SimpleGrantedAuthority> authorities = Collections.singletonList(
+                new SimpleGrantedAuthority(user.getRole().name())
+        );
+
+        return new DefaultOAuth2User(
+                authorities,
+                attributes,
+                "email"
+        );
     }
 }
