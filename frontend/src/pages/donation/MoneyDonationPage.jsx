@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import LandingHeader from "../../components/landing/LandingHeader";
 import Footer from "../../components/footer/Footer";
 import { TrendingUp, Heart, Users, Globe, DollarSign, CheckCircle, AlertTriangle, Target, BarChart3, ArrowRight, Shield, Award, Zap } from "lucide-react";
-import { wastegeStats } from '../../data/Data';
-import { impactMetrics } from '../../data/Data';
-import { pricingPlans } from '../../data/Data';
-import { problemSolutions } from '../../data/Data';
+import { wastegeStats } from '../../data/DonationPageData';
+import { impactMetrics } from '../../data/DonationPageData';
+import { pricingPlans } from '../../data/DonationPageData';
+import { problemSolutions } from '../../data/DonationPageData';
 import { HeartbeatLine } from '../../components/HeartBeatLine';
+import ImpactStories from './component/ImpactStories'
+import FundUtilization from './component/FundUtilization'
 
 const donationAmounts = [500, 1000, 2500, 5000, 10000, 25000];
 
@@ -166,7 +168,7 @@ export default function MoneyDonatePage() {
       </section>
       
       {/* Donation Plans */}
-      <section className="py-16 bg-gray-50 dark:bg-black">
+      <section className=" bg-gray-50 dark:bg-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-primary-500">
@@ -349,71 +351,13 @@ export default function MoneyDonatePage() {
       {/* Impact Breakdown */}
       <section className="py-16 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-black dark:to-slate-800">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">
-              Where Your Money Goes
-            </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300">
-              Complete transparency in fund utilization
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-white dark:bg-slate-900 rounded-xl p-6 text-center shadow-lg">
-              <div className="text-3xl font-bold text-green-500 mb-2">72%</div>
-              <div className="font-semibold mb-1">Direct Medicine Distribution</div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">Procurement, validation, and delivery to beneficiaries</div>
-            </div>
-            <div className="bg-white dark:bg-slate-900 rounded-xl p-6 text-center shadow-lg">
-              <div className="text-3xl font-bold text-blue-500 mb-2">15%</div>
-              <div className="font-semibold mb-1">Technology & Infrastructure</div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">Platform development, AI matching, and system maintenance</div>
-            </div>
-            <div className="bg-white dark:bg-slate-900 rounded-xl p-6 text-center shadow-lg">
-              <div className="text-3xl font-bold text-purple-500 mb-2">8%</div>
-              <div className="font-semibold mb-1">Quality Assurance</div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">Doctor validation, safety checks, and compliance</div>
-            </div>
-            <div className="bg-white dark:bg-slate-900 rounded-xl p-6 text-center shadow-lg">
-              <div className="text-3xl font-bold text-orange-500 mb-2">5%</div>
-              <div className="font-semibold mb-1">Administrative Costs</div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">Operations, legal, and regulatory compliance</div>
-            </div>
-          </div>
-
-          <div className="mt-12 bg-white dark:bg-slate-900 rounded-2xl p-8 shadow-xl">
-            <h3 className="text-2xl font-bold mb-6 text-center text-gray-900 dark:text-white">
-              Real Impact Stories
-            </h3>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              <div className="text-center">
-                <div className="text-4xl mb-4">👵</div>
-                <h4 className="font-semibold mb-2">Sunita Devi, 65</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  "Received diabetes medicines worth ₹8,000 monthly through HopeMeds. Now I can manage my condition without financial stress."
-                </p>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl mb-4">👨‍⚕️</div>
-                <h4 className="font-semibold mb-2">Dr. Rajesh Kumar</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  "As a validator, I've helped redistribute over 500 medicine packages. The platform ensures only quality medications reach patients."
-                </p>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl mb-4">👨‍💼</div>
-                <h4 className="font-semibold mb-2">Amit Sharma, Donor</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  "My ₹5,000 monthly donation supports 15 families. The transparency reports show exactly where my money goes."
-                </p>
-              </div>
-            </div>
-          </div>
+          <FundUtilization/>
+          <ImpactStories />
         </div>
       </section>
 
       {/* Trust Indicators */}
-      <section className="py-12 bg-white dark:bg-black">
+      <section className="pt-10 bg-white dark:bg-black">
         <div className="max-w-6xl mx-auto px-4 text-center">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="flex items-center justify-center gap-4">
@@ -434,7 +378,7 @@ export default function MoneyDonatePage() {
               <Users className="w-8 h-8 text-purple-500" />
               <div>
                 <div className="font-semibold text-gray-900 dark:text-white">Community Driven</div>
-                <div className="text-sm text-gray-600 dark:text-gray-300">150K+ active donors</div>
+                <div className="text-sm text-gray-600 dark:text-gray-300">25K+ active donors</div>
               </div>
             </div>
           </div>
