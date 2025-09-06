@@ -4,6 +4,7 @@ import {
     Eye, EyeOff, User, Mail, Shield, Stethoscope, Heart
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import apiClient from '../../api/axios';
 
 const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 const validatePassword = (password) =>
@@ -11,32 +12,30 @@ const validatePassword = (password) =>
 const validatePhoneNumber = (phone) => /^\+?[\d\s\-\(\)]{10,}$/.test(phone);
 
 const USER_ROLES = {
-    PATIENT: {
-        value: 'patient',
-        label: 'Patient',
-        icon: Heart,
-        color: 'bg-blue-500',
-        description: 'Receive donated medicines',
-    },
-    DOCTOR: {
-        value: 'doctor',
-        label: 'Doctor',
-        icon: Stethoscope,
-        color: 'bg-green-500',
-        description: 'Verify medicine safety',
-    },
-    ADMIN: {
-        value: 'admin',
-        label: 'Admin',
-        icon: Shield,
-        color: 'bg-purple-500',
-        description: 'Manage distribution network',
-    }
+  PATIENT: {
+    value: 'PATIENT',
+    label: 'Patient',
+    icon: Heart,
+    color: 'bg-blue-500',
+    description: 'Receive & donated medicines',
+  },
+  DOCTOR: {
+    value: 'DOCTOR',
+    label: 'Doctor',
+    icon: Stethoscope,
+    color: 'bg-green-500',
+    description: 'Verify medicine safety',
+  },
+  ADMIN: {
+    value: 'ADMIN',
+    label: 'Admin',
+    icon: Shield,
+    color: 'bg-purple-500',
+    description: 'Manage distribution network',
+  }
 };
 
 export default function SignupCard({ isFlipped, setIsFlipped }) {
-
-    // Copy/paste ALL your handling logic, validations, and state
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -48,9 +47,7 @@ export default function SignupCard({ isFlipped, setIsFlipped }) {
         confirmPassword: '',
         fullName: '',
         phoneNumber: '',
-        role: 'patient',
-        dateOfBirth: '',
-        gender: '',
+        role: USER_ROLES.PATIENT.value,
         specialization: '',
         licenseNumber: '',
         department: '',
@@ -106,29 +103,15 @@ export default function SignupCard({ isFlipped, setIsFlipped }) {
                     delete fieldErrors.phoneNumber;
                 }
                 break;
-            case 'dateOfBirth':
-                if (!value) {
-                    fieldErrors.dateOfBirth = 'Date of birth is required';
-                } else {
-                    const today = new Date();
-                    const birthDate = new Date(value);
-                    const age = today.getFullYear() - birthDate.getFullYear();
-                    if (age < 13) {
-                        fieldErrors.dateOfBirth = 'Must be at least 13 years old';
-                    } else {
-                        delete fieldErrors.dateOfBirth;
-                    }
-                }
-                break;
             case 'licenseNumber':
-                if (formData.role === 'doctor' && !value) {
+                if (formData.role === 'DOCTOR' && !value) {
                     fieldErrors.licenseNumber = 'Medical license number is required for doctors';
                 } else {
                     delete fieldErrors.licenseNumber;
                 }
                 break;
             case 'specialization':
-                if (formData.role === 'doctor' && !value) {
+                if (formData.role === 'DOCTOR' && !value) {
                     fieldErrors.specialization = 'Specialization is required for doctors';
                 } else {
                     delete fieldErrors.specialization;
@@ -172,44 +155,109 @@ export default function SignupCard({ isFlipped, setIsFlipped }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setIsLoading(true);
-        const requiredFields = [
-            'email',
-            'password',
-            'confirmPassword',
-            'fullName',
-            'phoneNumber',
-            'dateOfBirth',
-            'termsAccepted',
-        ];
-        if (formData.role === 'doctor') requiredFields.push('specialization', 'licenseNumber');
-        if (formData.role === 'admin') requiredFields.push('department');
 
-        let hasErrors = false;
+        let requiredFields = ['email', 'password', 'confirmPassword', 'fullName', 'phoneNumber', 'termsAccepted'];
+        if (formData.role === USER_ROLES.DOCTOR) {
+            requiredFields.push('specialization', 'licenseNumber');
+        }
+        if (formData.role === USER_ROLES.ADMIN) {
+            requiredFields.push('department');
+        }
+
+        const newErrors = {};
+
         requiredFields.forEach((field) => {
-            if (!formData[field]) {
-                validateField(field, formData[field]);
-                hasErrors = true;
+            const value = formData[field];
+            switch (field) {
+                case 'email':
+                    if (!value) newErrors.email = 'Email is required';
+                    else if (!validateEmail(value)) newErrors.email = 'Please enter a valid email address';
+                    break;
+                case 'password':
+                    if (!value) newErrors.password = 'Password is required';
+                    else if (!validatePassword(value))
+                        newErrors.password =
+                            'Password must be at least 8 characters with uppercase, lowercase, number, and special character';
+                    break;
+                case 'confirmPassword':
+                    if (!value) newErrors.confirmPassword = 'Please confirm your password';
+                    else if (value !== formData.password) newErrors.confirmPassword = 'Passwords do not match';
+                    break;
+                case 'fullName':
+                    if (!value) newErrors.fullName = 'Full name is required';
+                    else if (value.length < 2) newErrors.fullName = 'Name must be at least 2 characters';
+                    break;
+                case 'phoneNumber':
+                    if (!value) newErrors.phoneNumber = 'Phone number is required';
+                    else if (!validatePhoneNumber(value)) newErrors.phoneNumber = 'Please enter a valid phone number';
+                    break;
+                case 'specialization':
+                    if (formData.role === USER_ROLES.DOCTOR && !value) newErrors.specialization = 'Specialization is required for doctors';
+                    break;
+                case 'licenseNumber':
+                    if (formData.role === USER_ROLES.DOCTOR && !value) newErrors.licenseNumber = 'Medical license number is required for doctors';
+                    break;
+                case 'department':
+                    if (formData.role === USER_ROLES.ADMIN && !value) newErrors.department = 'Department is required for admins';
+                    break;
+                case 'termsAccepted':
+                    if (!value) newErrors.termsAccepted = 'You must accept the terms and conditions';
+                    break;
+                default:
+                    break;
             }
         });
 
-        if (hasErrors || Object.keys(errors).length > 0) {
-            setIsLoading(false);
-            return;
-        }
+        setErrors(newErrors);
 
+        if (Object.keys(newErrors).length > 0) return;
+
+        setIsLoading(true);
         try {
-            await new Promise((resolve) => setTimeout(resolve, 2000));
-            setFormData((prev) => ({
-                ...prev,
+            await apiClient.post('/account/signup', {
+                email: formData.email,
+                password: formData.password,
+                fullName: formData.fullName,
+                phoneNumber: formData.phoneNumber,
+                role: formData.role,
+                specialization: formData.specialization,
+                licenseNumber: formData.licenseNumber,
+                department: formData.department,
+                termsAccepted: formData.termsAccepted,
+            });
+            alert('Account created successfully! Please login.');
+            setFormData({
+                email: '',
                 password: '',
                 confirmPassword: '',
+                fullName: '',
+                phoneNumber: '',
+                role: USER_ROLES.PATIENT.value,
+                specialization: '',
+                licenseNumber: '',
+                department: '',
                 termsAccepted: false,
-            }));
-            alert('Account created successfully! Please log in.');
+            });
             navigate('/login');
-        } catch {
-            setErrors({ submit: 'Authentication failed. Please try again.' });
+        } catch (err) {
+            if (err.isBackendDown) {
+                setErrors({ submit: err.message });
+            } else {
+                const errMsg =
+                    (err.response &&
+                        err.response.data &&
+                        (err.response.data.message || err.response.data.error)) ||
+                    err.message ||
+                    '';
+
+                if (errMsg.toLowerCase().includes('email already in use')) {
+                    setErrors({
+                        submit: 'This email is already registered. Please login or use another email.',
+                    });
+                } else {
+                    setErrors({ submit: errMsg || 'Signup failed. Please try again.' });
+                }
+            }
         } finally {
             setIsLoading(false);
         }
@@ -292,7 +340,7 @@ export default function SignupCard({ isFlipped, setIsFlipped }) {
                         </div>
                     </div>
 
-                    <form onSubmit={handleSubmit} className="space-y-4">
+                    <form onSubmit={handleSubmit} noValidate className="space-y-4">
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
                             <div className="relative">
@@ -301,7 +349,7 @@ export default function SignupCard({ isFlipped, setIsFlipped }) {
                                     name="fullName"
                                     value={formData.fullName}
                                     onChange={handleInputChange}
-                                    className={`w-full px-4 py-3 bg-gray-50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all ${errors.fullName && touched.fullName ? 'border-red-300' : 'border-gray-200'
+                                    className={`w-full px-4 py-3 bg-white text-gray-700 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all ${errors.fullName && touched.fullName ? 'border-red-300' : 'border-gray-200'
                                         }`}
                                     placeholder="Enter your full name"
                                 />
@@ -318,7 +366,7 @@ export default function SignupCard({ isFlipped, setIsFlipped }) {
                                     name="email"
                                     value={formData.email}
                                     onChange={handleInputChange}
-                                    className={`w-full px-4 py-3 bg-gray-50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all ${errors.email && touched.email ? 'border-red-300' : 'border-gray-200'
+                                    className={`w-full px-4 py-3 bg-white text-gray-700  border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all ${errors.email && touched.email ? 'border-red-300' : 'border-gray-200'
                                         }`}
                                     placeholder="Enter your email"
                                 />
@@ -334,7 +382,7 @@ export default function SignupCard({ isFlipped, setIsFlipped }) {
                                 name="phoneNumber"
                                 value={formData.phoneNumber}
                                 onChange={handleInputChange}
-                                className={`w-full px-4 py-3 bg-gray-50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all ${errors.phoneNumber && touched.phoneNumber ? 'border-red-300' : 'border-gray-200'
+                                className={`w-full px-4 py-3 bg-white text-gray-700  border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all ${errors.phoneNumber && touched.phoneNumber ? 'border-red-300' : 'border-gray-200'
                                     }`}
                                 placeholder="Enter your phone number"
                             />
@@ -343,41 +391,8 @@ export default function SignupCard({ isFlipped, setIsFlipped }) {
                             )}
                         </div>
 
-                        <div className="grid grid-cols-2 gap-4">
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">Date of Birth *</label>
-                                <input
-                                    type="date"
-                                    name="dateOfBirth"
-                                    value={formData.dateOfBirth}
-                                    onChange={handleInputChange}
-                                    className={`w-full px-4 py-3 bg-gray-50 border text-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all ${errors.dateOfBirth && touched.dateOfBirth ? 'border-red-300' : 'border-gray-200'
-                                        }`}
-                                />
-                                {errors.dateOfBirth && touched.dateOfBirth && (
-                                    <p className="mt-1 text-sm text-red-600">{errors.dateOfBirth}</p>
-                                )}
-                            </div>
-
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">Gender</label>
-                                <select
-                                    name="gender"
-                                    value={formData.gender}
-                                    onChange={handleInputChange}
-                                    className="w-full px-4 py-3 bg-gray-50 text-gray-500 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all"
-                                >
-                                    <option value="">Select Gender</option>
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
-                                    <option value="other">Other</option>
-                                    <option value="prefer-not-to-say">Prefer not to say</option>
-                                </select>
-                            </div>
-                        </div>
-
                         {/* Additional Doctor fields if role selected */}
-                        {formData.role === 'doctor' && (
+                        {formData.role === 'DOCTOR' && (
                             <div className="grid grid-cols-1 gap-4">
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700 mb-2">Medical Specialization *</label>
@@ -385,7 +400,7 @@ export default function SignupCard({ isFlipped, setIsFlipped }) {
                                         name="specialization"
                                         value={formData.specialization}
                                         onChange={handleInputChange}
-                                        className={`w-full px-4 py-3 bg-gray-50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all ${errors.specialization && touched.specialization ? 'border-red-300' : 'border-gray-200'
+                                        className={`w-full px-4 py-3 bg-white text-gray-700  border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all ${errors.specialization && touched.specialization ? 'border-red-300' : 'border-gray-200'
                                             }`}
                                     >
                                         <option value="">Select Specialization</option>
@@ -412,7 +427,7 @@ export default function SignupCard({ isFlipped, setIsFlipped }) {
                                         name="licenseNumber"
                                         value={formData.licenseNumber}
                                         onChange={handleInputChange}
-                                        className={`w-full px-4 py-3 bg-gray-50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all ${errors.licenseNumber && touched.licenseNumber ? 'border-red-300' : 'border-gray-200'
+                                        className={`w-full px-4 py-3 bg-white text-gray-700  border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all ${errors.licenseNumber && touched.licenseNumber ? 'border-red-300' : 'border-gray-200'
                                             }`}
                                         placeholder="Enter your medical license number"
                                     />
@@ -424,14 +439,14 @@ export default function SignupCard({ isFlipped, setIsFlipped }) {
                         )}
 
                         {/* Additional Admin fields if role selected */}
-                        {formData.role === 'admin' && (
+                        {formData.role === 'ADMIN' && (
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-2">Department *</label>
                                 <select
                                     name="department"
                                     value={formData.department}
                                     onChange={handleInputChange}
-                                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all"
+                                    className="w-full px-4 py-3 bg-white text-gray-700  border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all"
                                 >
                                     <option value="">Select Department</option>
                                     <option value="distribution">Distribution Management</option>
@@ -451,7 +466,7 @@ export default function SignupCard({ isFlipped, setIsFlipped }) {
                                     name="password"
                                     value={formData.password}
                                     onChange={handleInputChange}
-                                    className={`w-full px-4 py-3 bg-gray-50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all pr-12 ${errors.password && touched.password ? 'border-red-300' : 'border-gray-200'
+                                    className={`w-full px-4 py-3 bg-white text-gray-700  border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all pr-12 ${errors.password && touched.password ? 'border-red-300' : 'border-gray-200'
                                         }`}
                                     placeholder="Enter your password"
                                 />
@@ -481,7 +496,7 @@ export default function SignupCard({ isFlipped, setIsFlipped }) {
                                     name="confirmPassword"
                                     value={formData.confirmPassword}
                                     onChange={handleInputChange}
-                                    className={`w-full px-4 py-3 bg-gray-50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all pr-12 ${errors.confirmPassword && touched.confirmPassword ? 'border-red-300' : 'border-gray-200'
+                                    className={`w-full px-4 py-3 bg-white text-gray-700  border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all pr-12 ${errors.confirmPassword && touched.confirmPassword ? 'border-red-300' : 'border-gray-200'
                                         }`}
                                     placeholder="Confirm your password"
                                 />
