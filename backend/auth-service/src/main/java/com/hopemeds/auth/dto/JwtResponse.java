@@ -1,11 +1,16 @@
 package com.hopemeds.auth.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class JwtResponse {
+
     private String token;
     private String tokenType = "Bearer";
     private String id;
@@ -19,5 +24,6 @@ public class JwtResponse {
         this.email = email;
         this.fullName = fullName;
         this.role = role;
+        this.tokenType = "Bearer";
     }
 }
