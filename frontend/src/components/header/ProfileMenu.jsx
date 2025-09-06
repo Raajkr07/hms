@@ -1,5 +1,5 @@
 import { Menu, Button, Text, Avatar } from '@mantine/core';
-import avatarImage from '../../assets/man.png';
+import avatarImage from '../../assets/user-avatar.png';
 import {
   IconSettings,
   IconSearch,
