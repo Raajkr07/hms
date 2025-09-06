@@ -17,8 +17,8 @@ import {
   Zap,
 } from "lucide-react";
 
-import { wastegeStats, impactMetrics, problemSolutions } from "../../data/Data";
-import { medicineDonationPlans } from "../../data/Data";
+import { wastegeStats, impactMetrics, problemSolutions } from "../../data/DonationPageData";
+import { medicineDonationPlans } from "../../data/MedicineDonationData";
 
 export default function MedicineDonationPage() {
   const [selectedMode, setSelectedMode] = useState("donate"); // 'donate' or 'request'
