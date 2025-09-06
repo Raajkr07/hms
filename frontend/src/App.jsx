@@ -5,6 +5,7 @@ import { createTheme, MantineProvider } from '@mantine/core';
 import AppRoutes from './routes/AppRoutes';
 import { BrowserRouter } from 'react-router-dom';
 import FloatingChatbot from './components/FloatingChatbot';
+import { AuthProvider } from './contexts/AuthContext.jsx';
 
 const theme = createTheme({
   focusRing:"never",
@@ -33,13 +34,15 @@ const theme = createTheme({
 
 function App() {
   return (
-    <MantineProvider theme={theme} defaultColorScheme="dark">
+    <MantineProvider theme={theme} defaultColorScheme="dark" withNormalizeCSS withGlobalStyles>
       <BrowserRouter>
-        <AppRoutes/>
-        <FloatingChatbot />
+        <AuthProvider>
+          <AppRoutes />
+          <FloatingChatbot />
+        </AuthProvider>
       </BrowserRouter>
     </MantineProvider>
   );
 }
 
-export default App
+export default App;
