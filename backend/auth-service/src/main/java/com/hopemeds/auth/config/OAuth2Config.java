@@ -1,10 +1,11 @@
 package com.hopemeds.auth.config;
 
-import com.hopemeds.auth.security.*;
+import com.hopemeds.auth.security.OAuth2AuthenticationSuccessHandler;
+import com.hopemeds.auth.security.SocialOAuth2UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class OAuth2Config {
@@ -20,11 +21,16 @@ public class OAuth2Config {
 
     @Bean
     public SecurityFilterChain oauth2FilterChain(HttpSecurity http) throws Exception {
-        http.oauth2Login(oauth2 -> oauth2
-                .userInfoEndpoint(userInfo -> userInfo.userService(socialOAuth2UserService))
-                .successHandler(oAuth2AuthenticationSuccessHandler)
-        );
+        http
+                .securityMatcher("/oauth2/**")   // exclusively OAuth2 requests
+                .authorizeHttpRequests(auth -> auth.anyRequest().permitAll())
+                .oauth2Login(oauth2 -> oauth2
+                        .userInfoEndpoint(userInfo -> userInfo.userService(socialOAuth2UserService))
+                        .successHandler(oAuth2AuthenticationSuccessHandler)
+                )
+                .csrf(csrf -> csrf.disable());
 
         return http.build();
     }
+
 }
