@@ -63,16 +63,31 @@ public class AuthController {
         return ResponseEntity.ok("Email verified successfully.");
     }
 
+    @PostMapping("/verify-otp")
+    public ResponseEntity<?> verifyOtp(@Valid @RequestBody OtpVerificationRequest request) {
+        boolean valid = passwordResetOtpService.validateOtp(request.getEmail(), request.getOtp());
+        if (!valid) {
+            return ResponseEntity.badRequest().body(new OtpVerifyResponse("Invalid or expired OTP", null, false));
+        }
+        passwordResetOtpService.invalidateOtp(request.getEmail());
+
+        User user = userService.findByEmail(request.getEmail())
+                .orElseThrow(() -> new RuntimeException("User not found after OTP verification"));
+        PasswordResetToken resetToken = passwordResetTokenService.createPasswordResetToken(user);
+        return ResponseEntity.ok(new OtpVerifyResponse("OTP verified", resetToken.getToken(), true));
+    }
+
+
+
     @PostMapping("/forgot-password")
     public ResponseEntity<?> forgotPassword(@Valid @RequestBody ForgotPasswordRequest request) {
-        User user = userService.findByEmail(request.getEmail())
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
-        PasswordResetToken resetToken = passwordResetTokenService.createPasswordResetToken(user);
-        String resetUrl = "http://localhost:3000/reset-password?token=" + resetToken.getToken();
-        emailService.sendEmail(user.getEmail(), "Password Reset Request", "Reset your password: " + resetUrl);
-
-        return ResponseEntity.ok("Password reset email sent.");
+        // Send generic success to prevent user enumeration
+        userService.findByEmail(request.getEmail()).ifPresent(user -> {
+            String otp = passwordResetOtpService.generateOtpForUser(user);
+            String emailContent = "Your password reset code is: " + otp + "\nThis code is valid for 15 minutes.";
+            emailService.sendEmail(user.getEmail(), "Password Reset Request", emailContent);
+        });
+        return ResponseEntity.ok("If your email exists in our system, you will receive a password reset OTP shortly.");
     }
 
     @PostMapping("/reset-password")
