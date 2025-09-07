@@ -95,8 +95,6 @@ const Sidebar = ({ collapsed = false }) => {
           </NavLink>
         ))}
       </nav>
-
-      {/* Footer */}
       <div className="mt-auto pb-6">
         {!collapsed && (
           <div className="text-center text-neutral-500 dark:text-neutral-400 text-xs no-underline">
