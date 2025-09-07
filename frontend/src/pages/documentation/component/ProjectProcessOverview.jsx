@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import doctorImage from '../../../assets/doctor-avatar.png';
+import adminImage from '../../../assets/admin-avatar.jpg';
 
 const ProjectProcessOverview = () => {
   const [particles, setParticles] = useState([]);
@@ -61,7 +63,6 @@ const ProjectProcessOverview = () => {
     },
   ];
 
-  // Color theme mapping
   const colorClasses = {
     orange: {
       borderHover: "hover:border-orange-400",
@@ -90,15 +91,15 @@ const ProjectProcessOverview = () => {
   };
 
   return (
-    <section className="min-h-screen bg-white dark:bg-black p-8 flex items-center justify-center">
+    <section className="min-h-screen bg-white dark:bg-black p-6 md:p-8 flex items-center justify-center">
       <div className="max-w-7xl w-full">
         <h2
-          className="text-3xl font-extrabold text-primary-500 mb-12 text-center"
+          className="text-2xl sm:text-3xl font-extrabold text-primary-500 mb-10 text-center"
           style={{ fontFamily: "'Merriweather', serif" }}
         >
           Project Process Overview
         </h2>
-        <div className="grid md:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           {processItems.map(({ title, points, color }, idx) => {
             const c = colorClasses[color];
             return (
@@ -106,11 +107,12 @@ const ProjectProcessOverview = () => {
                 key={idx}
                 className={`
                   border border-transparent rounded-2xl bg-gradient-to-br from-black/80 to-black/60
-                  group relative overflow-hidden p-6 transition-all duration-500 ease-in-out
+                  group relative overflow-hidden p-6 md:p-8 transition-all duration-500 ease-in-out
                   ${c.borderHover} ${c.shadowHover}
                   hover:scale-[1.04] active:scale-100
+                  flex flex-col items-center text-center
                 `}
-                style={{ borderWidth: '2px' }}
+                style={{ borderWidth: "2px" }}
               >
                 {/* Glowing animated color overlay */}
                 <div
@@ -118,11 +120,11 @@ const ProjectProcessOverview = () => {
                   style={{
                     background:
                       color === "orange"
-                        ? "radial-gradient(circle at 60% 30%,rgba(249,115,22,0.11) 0%,transparent 65%)"
+                        ? doctorImage
                         : color === "blue"
                         ? "radial-gradient(circle at 60% 30%,rgba(59,130,246,0.11) 0%,transparent 65%)"
                         : "radial-gradient(circle at 60% 30%,rgba(147,51,234,0.11) 0%,transparent 65%)",
-                    transition: "opacity 0.7s"
+                    transition: "opacity 0.7s",
                   }}
                 />
                 {/* Gradient border highlight */}
@@ -140,7 +142,7 @@ const ProjectProcessOverview = () => {
                   {particles.map((particle) => (
                     <div
                       key={`${color}-${particle.id}`}
-                      className={`absolute h-1 w-1 rounded-full ${c.particleBg} animate-pulse`}
+                      className={`absolute h-2 w-2 rounded-full ${c.particleBg} animate-pulse`}
                       style={{
                         top: `${(particle.top + idx * 20) % 100}%`,
                         left: `${(particle.left + idx * 30) % 100}%`,
@@ -156,51 +158,50 @@ const ProjectProcessOverview = () => {
                   ))}
                 </div>
                 {/* Content */}
-                <div className="flex flex-col gap-4 relative z-10">
-                  <div className="flex flex-row gap-4 items-start">
-                    <div
-                      className={`
-                        rounded-lg overflow-hidden w-16 h-16 bg-gray-800 flex-shrink-0 border border-gray-700
-                        ${c.borderHover} transition-colors duration-300
-                      `}
-                    >
-                      <img
-                        alt={title}
-                        src={
-                          color === "orange"
-                            ? "https://images.unsplash.com/photo-1544531585-9847b68c8c86?w=300&h=300&fit=crop"
-                            : color === "blue"
-                            ? "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=300&h=300&fit=crop"
-                            : "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop"
-                        }
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                      />
-                    </div>
-                    <div>
-                      <h3
-                        className={`text-xl font-bold mb-1 ${c.text} transition-colors duration-300`}
-                        style={{ fontFamily: "'Merriweather', serif" }}
-                      >
-                        {title}
-                      </h3>
-                      <ul className="list-disc pl-4 space-y-1 text-gray-200 font-poppins text-sm">
-                        {points.map((point, i) => (
-                          <li key={i}>{point}</li>
-                        ))}
-                      </ul>
-                    </div>
+                <div className="flex flex-col items-center relative z-10 w-full max-w-xs">
+                  {/* Image */}
+                  <div
+                    className={`
+                      rounded-lg overflow-hidden w-24 h-24 bg-gray-800 border border-gray-700 mb-4
+                      ${c.borderHover} transition-colors duration-300
+                    `}
+                  >
+                    <img
+                      alt={title}
+                      src={
+                        color === "orange"
+                          ? "https://images.unsplash.com/photo-1544531585-9847b68c8c86?w=300&h=300&fit=crop"
+                          : color === "blue"
+                          ? doctorImage
+                          : adminImage
+                      }
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
                   </div>
-                  <hr className={`my-4 border-t ${c.divider} opacity-70`} />
+                  {/* Title */}
+                  <h3
+                    className={`text-xl sm:text-2xl font-bold mb-4 ${c.text} transition-colors duration-300`}
+                    style={{ fontFamily: "'Merriweather', serif" }}
+                  >
+                    {title}
+                  </h3>
+                  {/* Points */}
+                  <ul className="list-disc pl-5 space-y-2 text-gray-200 font-poppins text-sm sm:text-base text-left">
+                    {points.map((point, i) => (
+                      <li key={i}>{point}</li>
+                    ))}
+                  </ul>
                 </div>
+                <hr className={`my-6 border-t ${c.divider} opacity-70 w-full`} />
               </div>
             );
           })}
         </div>
       </div>
-      <style jsx>{`
+      <style>{`
         @keyframes float {
-          0%, 100% { transform: translateY(0px) scale(var(--scale)); }
-          50% { transform: translateY(-10px) scale(var(--scale)); }
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-10px); }
         }
       `}</style>
     </section>
