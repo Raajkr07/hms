@@ -32,7 +32,7 @@ const LandingHeader = ({ onLogoClick }) => {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-40 h-[60px] sm:h-[70px] flex justify-between items-center px-3 sm:px-6 transition-all duration-300 ease-in-out ${
-        scrolled ? 'shadow-lg border-b border-neutral-200 dark:border-neutral-700' : ''
+        scrolled ? 'shadow-lg dark:shadow-lg dark:[--tw-shadow-color:#ffffff] border-b-4 border-neutral-200 dark:border-white' : ''
       }`}
       style={{ backgroundColor: isDark ? '#000000' : 'white' }}
       role="banner"
@@ -106,6 +106,15 @@ const LandingHeader = ({ onLogoClick }) => {
                 onClick={() => setMenuOpen(false)}
               >
                 Donate Medicine
+              </Link>
+              <Link
+                to="/documentation"
+                className="block px-6 py-3 text-black dark:text-white hover:bg-primary-100 dark:hover:bg-primary-950 hover:text-primary-600 dark:hover:text-primary-400 font-medium rounded-b-xl transition no-underline"
+                role="menuitem"
+                tabIndex={0}
+                onClick={() => setMenuOpen(false)}
+              >
+                Documentation
               </Link>
             </div>
           )}
