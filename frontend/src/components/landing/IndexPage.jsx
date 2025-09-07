@@ -9,10 +9,8 @@ import ScrollToTop from '../common/ScrollTop';
 import StatsSection from './status/StatsSection'
 import ThreeChartCarousel from './charts/ThreeChartCarousel';
 import NewsSection from './news/NwesSection';
-import AnimatedImageGrid from '../../components/landing/images/AnimatedImageGrid'
-import { images } from '../../data/Data';
 import Testimonials from './testimonials/SaviourCard'
-import { testimonialsData } from '../../data/Data';
+import { testimonialsData } from '../../data/TestimonialData';
 import Button from './button/button';
 
 const IndexPage = () => {
