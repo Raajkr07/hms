@@ -19,7 +19,7 @@ const Header = ({ sidebarCollapsed, onToggleSidebar, onLogoHoverEnter, onLogoHov
   }, []);
 
   const inputStyles = {
-    backgroundColor: theme.colorScheme === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'white',
+    backgroundColor: theme.colorScheme === 'dark' ? '#000000' : 'white',
     backdropFilter: 'blur(10px)',
     border: theme.colorScheme === 'dark' ? '1px solid rgba(255, 255, 255, 0.2)' : '1px solid #ced4da',
     borderRadius: 12,
@@ -44,7 +44,7 @@ const Header = ({ sidebarCollapsed, onToggleSidebar, onLogoHoverEnter, onLogoHov
       className={`fixed top-0 left-0 right-0 z-40 h-[60px] sm:h-[70px] lg:h-[70px] flex justify-between items-center px-2 sm:px-3 lg:px-6 transition-all duration-300 ease-in-out ${
         scrolled ? 'shadow-lg border-b border-neutral-200 dark:border-neutral-700' : ''
       }`}
-      style={{ backgroundColor: isDark ? '#08090C' : 'white' }}
+      style={{ backgroundColor: isDark ? '#000000' : 'white' }}
       role="banner"
     >
       <div className="flex items-center gap-2 sm:gap-4 lg:gap-6 flex-1 min-w-0"
@@ -65,7 +65,7 @@ const Header = ({ sidebarCollapsed, onToggleSidebar, onLogoHoverEnter, onLogoHov
             style={inputStyles}
             onFocus={() => setSearchFocused(true)}
             onBlur={() => setSearchFocused(false)}
-            aria-label="Search patients, doctors, appointments"
+            aria-label="Search patients, doctors, appointments" 
           />
         </div>
       </div>
@@ -117,9 +117,6 @@ const Header = ({ sidebarCollapsed, onToggleSidebar, onLogoHoverEnter, onLogoHov
           )}
         </ActionIcon>
 
-        <div className="flex items-center h-[32px] sm:h-[36px] lg:h-[42px]">
-          <ProfileMenu />
-        </div>
       </div>
     </header>
   );
