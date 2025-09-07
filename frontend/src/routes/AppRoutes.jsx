@@ -29,7 +29,7 @@ import LoginPage from '../components/auth/LoginPage';
 import SignupPage from '../components/auth/SignupPage';
 import ForgotPassword from '../components/auth/verification-Page/ForgotPasswordPage';
 import NewPasswordPage from '../components/auth/verification-Page/NewPasswordPage';
-
+import OAuth2Success from '../components/auth/Sucess';
 
 const PageLoadingSpinner = () => (
   <div className="min-h-screen flex items-center justify-center bg-black">
@@ -116,6 +116,7 @@ const AppRoutes = () => {
       <Route path="/privacy" element={<LazyWrapper><PrivacyPage /></LazyWrapper>} />
       <Route path="/accessibility" element={<LazyWrapper><AccessibilityPage /></LazyWrapper>} />
       <Route path="/sitemap" element={<LazyWrapper><SitemapPage /></LazyWrapper>} />
+      <Route path="/oauth2/success" element={<OAuth2Success />} />
 
       {/* Logout */}
       <Route path="/logout" element={<LogoutHandler />} />
