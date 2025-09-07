@@ -31,11 +31,14 @@ const LandingHeader = ({ onLogoClick }) => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-40 h-[60px] sm:h-[70px] flex justify-between items-center px-3 sm:px-6 transition-all duration-300 ease-in-out ${
-        scrolled ? 'shadow-lg dark:shadow-lg dark:[--tw-shadow-color:#ffffff] border-b-4 border-neutral-200 dark:border-white' : ''
-      }`}
-      style={{ backgroundColor: isDark ? '#000000' : 'white' }}
-      role="banner"
+      className={`fixed top-0 left-0 right-0 z-40 h-[60px] sm:h-[70px] flex justify-between items-center px-3 sm:px-6 transition-all duration-300 ease-in-out 
+        ${scrolled ? (isDark
+        ? 'border-b-4 border-gray-800 shadow-lg shadow-gray-800/50'
+        : 'border-b-4 border-neutral-200 shadow-lg')
+      : ''}
+  `}
+        style={{ backgroundColor: isDark ? '#000000' : 'white' }}
+        role="banner"
     >
       <div className="flex items-center gap-3 sm:gap-6 flex-1 min-w-0">
         <div
