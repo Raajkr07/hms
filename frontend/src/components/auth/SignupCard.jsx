@@ -590,7 +590,10 @@ export default function SignupCard({ isFlipped, setIsFlipped }) {
                     <div className="grid grid-cols-1 gap-4 max-w-sm mx-auto">
                         <button
                             type="button"
-                            onClick={() => alert('Google signup flow to be implemented')}
+                            onClick={(e) => {
+                                e.preventDefault();
+                                window.location.href = 'http://localhost:8080/oauth2/authorization/google';
+                            }}
                             className="w-full bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 font-semibold py-3 px-6 rounded-lg transition flex items-center justify-center space-x-3 cursor-pointer"
                         >
                             <svg className="w-5 h-5" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none">
