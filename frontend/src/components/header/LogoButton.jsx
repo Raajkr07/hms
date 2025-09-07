@@ -7,7 +7,6 @@ const LogoButton = ({ sidebarCollapsed, onToggleSidebar }) => {
       type="button"
       onClick={onToggleSidebar}
       aria-label={sidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-      title={sidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
       className="flex items-center gap-3 cursor-pointer hover:opacity-80 transition duration-200 focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2 rounded blinking-logo"
     >
       <IconHeartbeat size={40} stroke={2.5} className="text-primary-400" />
