@@ -16,9 +16,9 @@ export default function HeroSection() {
         <div className="flex flex-col md:flex-row items-center gap-12">
           <div className="md:flex-1 text-center md:text-left">
             <h1 className="text-6xl font-extrabold text-primary-600 mb-6">
-              Reducing Medicine Waste, Saving Lives
+              Reducing Medicine <span className="text-[#FACC15]">Waste</span>, Saving Lives
             </h1>
-            <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300 max-w-xl mx-auto md:mx-0">
+            <p className="text-lg font-heading leading-relaxed text-gray-700 dark:text-[#D1D5DB] max-w-xl mx-auto md:mx-0">
               HopeMeds connects unused medicines with those who need them most. Join our mission to eliminate medicine wastage and make healthcare accessible to everyone.
             </p>
           </div>
