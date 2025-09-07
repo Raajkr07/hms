@@ -1,17 +1,21 @@
 import React from 'react';
 import LogoButton from '../header/LogoButton';
 import { HeartbeatLine } from '../HeartBeatLine';
+import { Heart } from 'lucide-react';
 import {
-  Twitter, Linkedin, Github, Mail, Heart,
-} from 'lucide-react';
+  IconBrandX,
+  IconBrandLinkedin,
+  IconBrandGithub,
+  IconMail,
+} from '@tabler/icons-react';
 
 const footerLinks = [
   {
     title: "Project",
     links: [
       { label: "About HopeMeds", href: "/about" },
-      { label: "How it Works", href: "/how-it-works" },
       { label: "Impact & Results", href: "/impact" },
+      { label: "How it Works", href: "/how-it-works" },
       { label: "Donate", href: "/money" },
     ],
   },
@@ -19,18 +23,18 @@ const footerLinks = [
     title: "Resources",
     links: [
       { label: "Documentation", href: "/documentation" },
+      { label: "Medicine Safety", href: "/safety" },
       { label: "Contact Team", href: "/contact" },
       { label: "FAQs", href: "/faq" },
-      { label: "Medicine Safety", href: "/safety" },
     ],
   },
   {
     title: "Community",
     links: [
-      { label: "Partner NGOs", href: "/partners" },
       { label: "Volunteer Program", href: "/volunteers" },
       { label: "Terms & Policies", href: "/terms" },
       { label: "Privacy Policy", href: "/privacy" },
+      { label: "Partner NGOs", href: "/partners" },
     ],
   },
 ];
@@ -68,47 +72,47 @@ export default function Footer() {
               <span className="sr-only">Go to home</span>
             </div>
             <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed max-w-xs mb-6">
-              Empowering communities to reduce medicine wastage and improve healthcare accessibility through innovative redistribution solutions.
+              A project to reduce medicine waste and increase healthcare access through smart redistribution solutions.
             </p>
             {/* Social */}
             <nav className="flex space-x-2">
               <a
-                href="https://twitter.com/hope_meds"
+                href="https://x.com/hope_meds"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Follow us on Twitter"
-                className="w-9 h-9 bg-gray-100 dark:bg-gray-800 rounded-md flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-blue-500 hover:text-white transition-colors duration-200 focus-visible:underline focus:underline focus:outline-none active:underline underline-offset-4 relative"
+                className="w-9 h-9 bg-white dark:bg-black rounded-md flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-black dark:hover:bg-gray-800 hover:text-white transition-colors duration-200 focus-visible:underline focus:underline focus:outline-none active:underline underline-offset-4 relative"
                 tabIndex={0}
               >
-                <Twitter className="w-5 h-5" aria-hidden="true" />
+                <IconBrandX className="w-5 h-5" aria-hidden="true" />
               </a>
               <a
                 href="https://linkedin.com/company/hopemeds"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Connect with us on LinkedIn"
-                className="w-9 h-9 bg-gray-100 dark:bg-gray-800 rounded-md flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-blue-600 hover:text-white transition-colors duration-200 focus-visible:underline focus:underline focus:outline-none active:underline underline-offset-4 relative"
+                className="w-9 h-9 bg-white dark:bg-black rounded-md flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-blue-600 dark:hover:bg-blue-600 hover:text-white transition-colors duration-200 focus-visible:underline focus:underline focus:outline-none active:underline underline-offset-4 relative"
                 tabIndex={0}
               >
-                <Linkedin className="w-5 h-5" aria-hidden="true" />
+                <IconBrandLinkedin className="w-5 h-5" aria-hidden="true" />
               </a>
               <a
                 href="https://github.com/Raajkr07/hms"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="View our projects on GitHub"
-                className="w-9 h-9 bg-gray-100 dark:bg-gray-800 rounded-md flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-gray-700 hover:text-white transition-colors duration-200 focus-visible:underline focus:underline focus:outline-none active:underline underline-offset-4 relative"
+                className="w-9 h-9 bg-white dark:bg-black rounded-md flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-black dark:hover:bg-gray-800 hover:text-white transition-colors duration-200 focus-visible:underline focus:underline focus:outline-none active:underline underline-offset-4 relative"
                 tabIndex={0}
               >
-                <Github className="w-5 h-5" aria-hidden="true" />
+                <IconBrandGithub className="w-5 h-5" aria-hidden="true" />
               </a>
               <a
                 href="mailto:rk999900001@gmail.com"
                 aria-label="Send us an email"
-                className="w-9 h-9 bg-gray-100 dark:bg-gray-800 rounded-md flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-emerald-500 hover:text-white transition-colors duration-200 focus-visible:underline focus:underline focus:outline-none active:underline underline-offset-4 relative"
+                className="w-9 h-9 bg-white dark:bg-black rounded-md flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-primary-500 dark:dark:hover:bg-primary-500 hover:text-white transition-colors duration-200 focus-visible:underline focus:underline focus:outline-none active:underline underline-offset-4 relative"
                 tabIndex={0}
               >
-                <Mail className="w-5 h-5" aria-hidden="true" />
+                <IconMail className="w-5 h-5" aria-hidden="true" />
               </a>
             </nav>
           </div>
@@ -148,11 +152,8 @@ export default function Footer() {
           </p>
           <nav className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-5 text-gray-600 dark:text-gray-400">
             <div className="flex space-x-4 sm:space-x-5">
-              <a href="/accessibility" className="hover:text-emerald-600 dark:hover:text-emerald-400 focus-visible:underline focus:underline focus:outline-none active:underline underline-offset-4 relative">
+              <a href="/accessibility" className="hover:text-emerald-600 dark:hover:text-emerald-400 focus-visible:underline focus:underline focus:outline-none no-underline underline-offset-4 relative">
                 Accessibility
-              </a>
-              <a href="/sitemap" className="hover:text-emerald-600 dark:hover:text-emerald-400 focus-visible:underline focus:underline focus:outline-none active:underline underline-offset-4 relative">
-                Sitemap
               </a>
             </div>
             <span className="flex items-center" style={{ fontFamily: 'merriweather, serif' }}>
