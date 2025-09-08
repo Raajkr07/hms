@@ -27,7 +27,7 @@ const IndexPage = () => {
 
       <ScrollToTop scrollContainerRef={mainRef} />
       <LandingHeader onLogoClick={scrollToHero} />
-      <main ref={mainRef} className="flex-1 pt-[75px] w-full p-6 overflow-auto">
+      <main ref={mainRef} className="flex-1 pt-[75px] w-full overflow-auto">
         <div ref={heroSectionRef}>
           <HeroSection />
         </div>
