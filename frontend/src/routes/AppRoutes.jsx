@@ -3,7 +3,6 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { PrivateRoute, RoleBasedRoute, PublicRoute, AdminRoute, DoctorRoute } from '../components/PrivateRoute';
 
-// Lazy loaded heavy components - keep lazy loading for better performance
 const AdminDashboard = lazy(() => import('../account/admin/AdminDashboard'));
 const DoctorDashboard = lazy(() => import('../account/doctor/DoctorDashboard'));
 const UserDashboard = lazy(() => import('../account/users/UserDashboard'));
@@ -23,13 +22,13 @@ const PrivacyPage = lazy(() => import('../components/legals/PrivacyPage'));
 const AccessibilityPage = lazy(() => import('../components/legals/AccessibilityPage'));
 const SitemapPage = lazy(() => import('../components/legals/SitemapPage'));
 
-// Eager loaded components for instant load (landing, login, signup, password recovery)
 import IndexPage from '../components/landing/IndexPage';
 import LoginPage from '../components/auth/LoginPage';
 import SignupPage from '../components/auth/SignupPage';
 import ForgotPassword from '../components/auth/verification-Page/ForgotPasswordPage';
 import NewPasswordPage from '../components/auth/verification-Page/NewPasswordPage';
-import OAuth2Success from '../components/auth/Sucess';
+import UserMoneyDonationPage from '../account/users/pages/MoneyDonationPage';
+import OAuth2Success from '../components/auth/OAuth2Success';
 
 const PageLoadingSpinner = () => (
   <div className="min-h-screen flex items-center justify-center bg-black">
@@ -40,7 +39,6 @@ const PageLoadingSpinner = () => (
   </div>
 );
 
-// Wrapper for Suspense fallback - use for lazy loaded components only
 const LazyWrapper = ({ children }) => (
   <Suspense fallback={<PageLoadingSpinner />}>
     {children}
@@ -130,6 +128,7 @@ const AppRoutes = () => {
 
         <Route element={<AdminRoute />}>
           <Route path="/admin/*" element={<LazyWrapper><AdminDashboard /></LazyWrapper>} />
+          <Route path="/admin/money" element={<UserMoneyDonationPage/>}></Route>
         </Route>
 
         <Route element={<DoctorRoute />}>
