@@ -19,7 +19,7 @@ export default function SignupPage() {
         </div>
 
         <div className="text-white max-w-lg">
-          <h1 className="text-5xl font-bold leading-tight mb-6">Reducing Medicine Waste, Saving Lives.</h1>
+          <h1 className="text-5xl font-bold leading-tight mb-6">Reducing Medicine <span className='text-[#FACC15]'>waste</span>, Saving Lives.</h1>
           <p className="text-xl text-teal-100 leading-relaxed mb-8">
             Connect unused medicines with those who need them most. Join our mission to eliminate medicine wastage and
             make healthcare accessible to everyone.
