@@ -94,11 +94,7 @@ export default function ForgotPasswordPage() {
               HopeMeds
             </span>
           </div>
-
-          <section className="my-20 space-y-6 max-w-md">
-            <h1 className="text-5xl font-extrabold leading-tight">
-              Reset Password
-            </h1>
+          <section className="mb-52 max-w-md">
             <p className="text-lg text-teal-100 leading-relaxed">
               Enter your registered email address, and we'll send you an OTP to reset your password.
             </p>
@@ -120,7 +116,7 @@ export default function ForgotPasswordPage() {
           >
             <header className="mb-8 text-center">
               <h2 id="forgot-password-title" className="text-3xl font-extrabold text-primary-400">
-                Forgot Password
+                Reset Password
               </h2>
               <p className="mt-2 text-gray-600 text-sm">Enter your email to receive OTP</p>
             </header>
