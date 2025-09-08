@@ -64,7 +64,7 @@ const ScrollModal = ({ opened, onClose }) => {
         .form-container {
           display: flex;
           flex-direction: column;
-          gap: 2rem;
+          gap: 1rem;
           width: 100%;
         }
         .field-wrapper {
@@ -197,46 +197,12 @@ const ScrollModal = ({ opened, onClose }) => {
           },
         }}
       >
-        {/* Close icons */}
-        <ActionIcon
-          onClick={onClose}
-          style={{
-            position: 'absolute',
-            top: 16,
-            left: 16,
-            zIndex: 1000,
-            background: 'rgba(239, 68, 68, 0.8)',
-            backdropFilter: 'blur(10px)',
-            border: '1px solid rgba(255, 255, 255, 0.3)',
-          }}
-          className="bg-gradient-to-r from-red-400 to-red-500 hover:from-red-500 hover:to-red-600 text-white rounded-full shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300"
-          size="lg"
-        >
-          <IconX size={18} />
-        </ActionIcon>
 
-        <ActionIcon
-          onClick={onClose}
-          style={{
-            position: 'absolute',
-            top: 16,
-            right: 16,
-            zIndex: 1000,
-            background: 'rgba(239, 68, 68, 0.8)',
-            backdropFilter: 'blur(10px)',
-            border: '1px solid rgba(255, 255, 255, 0.3)',
-          }}
-          className="bg-gradient-to-r from-red-400 to-red-500 hover:from-red-500 hover:to-red-600 text-white rounded-full shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-300"
-          size="lg"
-        >
-          <IconX size={18} />
-        </ActionIcon>
-
-        <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold bg-gradient-to-r from-teal-500 to-emerald-500 bg-clip-text text-transparent">
+        <div className="text-center ">
+          <h2 className="text-2xl font-bold bg-gradient-to-r from-teal-500 to-emerald-500 bg-clip-text text-transparent">
             Need medicine, We will provide it.
           </h2>
-          <div className="w-16 h-1 bg-gradient-to-r from-teal-400 to-emerald-400 mx-auto mt-2 rounded-full"></div>
+          <div className="w-20 h-1 bg-gradient-to-r from-teal-400 to-emerald-400 mx-auto rounded-full"></div>
         </div>
 
         <form onSubmit={handleSubmit} className={`form-container${focusedField ? ' dimmed' : ''}`}>
@@ -270,40 +236,13 @@ const ScrollModal = ({ opened, onClose }) => {
             </div>
           ))}
 
-          <div
-            className={`field-wrapper${focusedField === 'jobRole' ? ' pump' : ''}`}
-            onMouseEnter={() => setFocusedField('jobRole')}
-            onMouseLeave={() => setFocusedField(null)}
-          >
-            <label className="block text-sm font-medium text-gray-600 dark:text-gray-300 mb-2 transition-all duration-300">
-              Job Role:
-            </label>
-            <Select
-              placeholder="Select Job Role"
-              data={[
-                { value: 'doctor', label: 'Doctor' },
-                { value: 'manager', label: 'Hospital Manager' },
-                { value: 'nurse', label: 'Nurse' },
-                { value: 'driver', label: 'Driver' },
-                { value: 'teacher', label: 'Teacher' },
-                { value: 'technician', label: 'Technician' },
-                { value: 'student', label: 'Student' },
-                { value: 'govt', label: 'Goverment employee' },
-                { value: 'other', label: 'Other' },
-              ]}
-              value={formData.jobRole}
-              onFocus={() => setFocusedField('jobRole')}
-              onBlur={() => setFocusedField(null)}
-              onChange={(value) => setFormData({ ...formData, jobRole: value })}
-              styles={inputStyles}
-            />
-          </div>
+          
 
           <Button
             type="submit"
             fullWidth
             size="lg"
-            mt="xl"
+            mt="lg"
             styles={{
               root: {
                 background: 'linear-gradient(135deg, #14B8A6 0%, #0D9488 100%)',
