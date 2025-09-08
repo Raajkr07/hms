@@ -12,6 +12,7 @@ import NewsSection from './news/NwesSection';
 import Testimonials from './testimonials/SaviourCard'
 import { testimonialsData } from '../../data/TestimonialData';
 import Button from './button/button';
+import NewInvite from './invite/NewInvite';
 
 const IndexPage = () => {
   const { showModal, closeModal } = UseScrollModal();
@@ -36,6 +37,7 @@ const IndexPage = () => {
         <Testimonials testimonials={testimonialsData} />
         <Button/>
         <NewsSection />
+        <NewInvite />
         <Footer />
       </main>
       <ScrollModal opened={showModal} onClose={closeModal} />
