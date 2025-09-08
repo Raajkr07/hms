@@ -179,7 +179,7 @@ export default function LoginPage() {
           </div>
           <section className="mt-10 space-y-6">
             <h2 className="text-5xl font-extrabold leading-tight">
-              Reducing Medicine Waste, Saving Lives.
+              Reducing Medicine <span className='text-[#FACC15]'>waste</span>, Saving Lives.
             </h2>
             <div className="space-y-4 text-teal-100 max-w-md">
               <div className="flex items-center space-x-3">
