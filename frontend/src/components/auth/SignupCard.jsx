@@ -304,7 +304,7 @@ export default function SignupCard({ isFlipped, setIsFlipped }) {
                     {/* Form Header */}
                     <div className="text-center mb-6">
                         <h2 className="text-3xl font-extrabold text-primary-400 mb-2">Join HopeMeds</h2>
-                        <h3 className="text-xl font-medium text-gray-600 mb-4">Help reduce medicine waste</h3>
+                        <h3 className="text-xl font-medium text-gray-600 mb-4">Help reduce medicine <span className='text-[#FACC15]'>waste</span></h3>
                         <p className="text-gray-500 text-sm">Create an account to start helping others</p>
                     </div>
 
