@@ -2,26 +2,16 @@ import React, { useState, useEffect } from "react";
 import LandingHeader from "../../components/landing/LandingHeader";
 import Footer from "../../components/footer/Footer";
 import {
-  TrendingUp,
   Heart,
-  Users,
-  Globe,
-  DollarSign,
   CheckCircle,
-  AlertTriangle,
-  Target,
-  BarChart3,
-  Shield,
-  Award,
   Users as UsersIcon,
-  Zap,
 } from "lucide-react";
 
-import { wastegeStats, impactMetrics, problemSolutions } from "../../data/DonationPageData";
+import { wastegeStats, impactMetrics } from "../../data/DonationPageData";
 import { medicineDonationPlans } from "../../data/MedicineDonationData";
 
 export default function MedicineDonationPage() {
-  const [selectedMode, setSelectedMode] = useState("donate"); // 'donate' or 'request'
+  const [selectedMode, setSelectedMode] = useState("donate");
   const [selectedPlan, setSelectedPlan] = useState(null);
   const [customQuantity, setCustomQuantity] = useState("");
   const [form, setForm] = useState({
@@ -31,7 +21,7 @@ export default function MedicineDonationPage() {
     medicineName: "",
     medicineQuantity: "",
     expiryDate: "",
-    prescriptionUpload: null, // for requests
+    prescriptionUpload: null,
     isAdult: false,
     newsletter: true,
   });
@@ -87,7 +77,6 @@ export default function MedicineDonationPage() {
         alert("Please enter medicine expiry date.");
         return;
       }
-      // Add further validations as needed for donation
     } else if (selectedMode === "request") {
       if (!form.medicineName) {
         alert("Please enter needed medicine name.");
@@ -97,10 +86,7 @@ export default function MedicineDonationPage() {
         alert("Please upload prescription.");
         return;
       }
-      // Add further validations as needed for request
     }
-
-    // Handle submission logic here for donation/request
 
     alert(`Thank you, your ${selectedMode} request has been submitted!`);
   };
