@@ -112,7 +112,6 @@ const UserDashboard = () => {
               height: '100%',
             }}
           >
-            <h1 className="text-3xl font-bold text-primary-500 dark:text-slate-50 mb-6">Dashboard</h1>
 
             <OverviewCards overviewCards={overviewCards} />
             <OverviewChartRecentDonations
