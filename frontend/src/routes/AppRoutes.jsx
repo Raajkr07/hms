@@ -28,6 +28,11 @@ import SignupPage from '../components/auth/SignupPage';
 import ForgotPassword from '../components/auth/verification-Page/ForgotPasswordPage';
 import NewPasswordPage from '../components/auth/verification-Page/NewPasswordPage';
 import UserMoneyDonationPage from '../account/users/pages/MoneyDonationPage';
+import UserProfile from '../account/users/pages/ProfilePage';
+import AppointmentPage from '../account/users/pages/AppointmentPage';
+import LocationPage from '../account/users/pages/LocationPage';
+import SettingPage from '../account/users/pages/SettingPage';
+import UserMedicineDonationPageWrapper from '../account/users/wrapper/UserMedicineDonationPageWrapper';
 import OAuth2Success from '../components/auth/OAuth2Success';
 
 const PageLoadingSpinner = () => (
@@ -128,7 +133,6 @@ const AppRoutes = () => {
 
         <Route element={<AdminRoute />}>
           <Route path="/admin/*" element={<LazyWrapper><AdminDashboard /></LazyWrapper>} />
-          <Route path="/admin/money" element={<UserMoneyDonationPage/>}></Route>
         </Route>
 
         <Route element={<DoctorRoute />}>
@@ -137,8 +141,14 @@ const AppRoutes = () => {
 
         <Route element={<RoleBasedRoute allowedRoles={['patient', 'doctor', 'admin']} />}>
           <Route path="/patient/*" element={<LazyWrapper><UserDashboard /></LazyWrapper>} />
+          <Route path="/patient/profile" element={<LazyWrapper><UserProfile /></LazyWrapper>} />
+          <Route path="/patient/money" element={<UserMoneyDonationPage/>}></Route>
+          <Route path="/patient/appointment" element={<AppointmentPage/>}></Route>
+          <Route path="/patient/donate" element={ <UserMedicineDonationPageWrapper selectedMode="donate" />} />
+          <Route path="/patient/request" element={ <UserMedicineDonationPageWrapper selectedMode="request" />}/></Route>
+          <Route path="/patient/location" element={<LocationPage/>}></Route>
+          <Route path="/patient/setting" element={<SettingPage/>}></Route>
         </Route>
-      </Route>
 
       {/* Catch-all 404 redirect */}
       <Route path="*" element={<Navigate to="/" replace />} />
