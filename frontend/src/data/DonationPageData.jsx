@@ -1,5 +1,5 @@
 import { Zap, DollarSign, Award } from 'lucide-react';
-import { Shield, Heart, Stethoscope, User, Users, Bell, MessageCircle, UserCheck, Globe, } from 'lucide-react';
+import { Shield, Heart, Users, Globe, } from 'lucide-react';
 
 export const pricingPlans = [
   {
@@ -7,12 +7,6 @@ export const pricingPlans = [
       amount: 500,
       icon: Heart,
       color: "from-blue-500 to-cyan-500",
-      benefits: [
-        "5 medicine packages redistributed",
-        "Helps 2-3 families monthly",
-        "Basic impact reports",
-        "Community recognition"
-      ],
       impact: "Covers medicine needs for 1 chronic patient for 1 month"
     },
     {
@@ -20,13 +14,6 @@ export const pricingPlans = [
       amount: 2500,
       icon: Shield,
       color: "from-green-500 to-emerald-500",
-      benefits: [
-        "25 medicine packages redistributed",
-        "Helps 10-12 families monthly",
-        "Detailed impact analytics",
-        "Priority donor support",
-        "Tax benefit certificate"
-      ],
       impact: "Covers medicine needs for 5 patients with chronic conditions",
       popular: true
     },
@@ -35,14 +22,6 @@ export const pricingPlans = [
       amount: 10000,
       icon: Award,
       color: "from-purple-500 to-pink-500",
-      benefits: [
-        "100+ medicine packages redistributed",
-        "Helps 40-50 families monthly",
-        "Comprehensive impact dashboard",
-        "Direct beneficiary connect",
-        "Quarterly impact calls",
-        "Special donor events access"
-      ],
       impact: "Establishes a small medicine bank serving 20+ families regularly"
     },
     {
@@ -50,15 +29,6 @@ export const pricingPlans = [
       amount: 25000,
       icon: Zap,
       color: "from-orange-500 to-red-500",
-      benefits: [
-        "250+ medicine packages redistributed",
-        "Helps 100+ families monthly",
-        "Real-time impact tracking",
-        "Personal impact coordinator",
-        "Monthly beneficiary stories",
-        "Partnership opportunities",
-        "Brand visibility options"
-      ],
       impact: "Powers a community medicine center serving entire neighborhoods"
     }
 ];
