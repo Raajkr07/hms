@@ -14,7 +14,7 @@ const OAuth2Success = () => {
       return;
     }
 
-    localStorage.setItem("authToken", token);
+    localStorage.setItem("token", token);
 
     fetch("http://localhost:8080/api/auth/me", {
       method: "GET",
