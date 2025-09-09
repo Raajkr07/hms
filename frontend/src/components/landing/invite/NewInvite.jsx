@@ -110,7 +110,7 @@ const NewInvite = () => {
                 type="submit"
                 className="px-6 py-3 font-bold text-white bg-primary-500 rounded-xl hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition"
               >
-                Join us, Give Hope
+                Give Hapiness
               </button>
             </form>
           </div>
