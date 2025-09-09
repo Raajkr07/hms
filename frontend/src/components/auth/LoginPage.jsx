@@ -101,18 +101,16 @@ export default function LoginPage() {
       const userData = {
         id,
         email,
-        fullName: fullName || email, // Fallback if fullName is missing
+        fullName: fullName || email,
         role,
       };
 
-      // Use AuthContext login (handles navigation)
       const result = await login(token, userData);
 
       if (!result.success) {
         throw new Error(result.error || 'Login failed');
       }
 
-      // Optional: Clear form on success
       setFormData({ email: '', password: '', rememberMe: false, role: 'patient' });
 
     } catch (err) {
@@ -122,7 +120,6 @@ export default function LoginPage() {
         const status = err.response.status;
         const data = err.response.data;
 
-        // Extract error message from either 'message' or 'error' key
         const serverMessage = data.message || data.error || '';
 
         switch (status) {
