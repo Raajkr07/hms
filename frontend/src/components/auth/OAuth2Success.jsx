@@ -1,35 +1,38 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from '../../contexts/AuthContext';
 
 const OAuth2Success = () => {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const token = params.get("token");
+  const hash = window.location.hash;
+  const tokenIndex = hash.indexOf('token=');
+  const token = tokenIndex !== -1 ? hash.substring(tokenIndex + 6) : null;
 
-    if (!token) {
-      navigate("/login", { replace: true });
-      return;
-    }
+  if (!token) {
+    navigate("/login", { replace: true });
+    return;
+  }
 
-    localStorage.setItem("token", token);
-
-    fetch("http://localhost:8080/api/auth/me", {
-      method: "GET",
-      headers: { Authorization: `Bearer ${token}` },
+  fetch("http://3.110.170.196:8080/api/auth/me", {
+    method: "GET",
+    headers: { Authorization: `Bearer ${token}` },
+  })
+    .then(async (res) => {
+      if (!res.ok) throw new Error("Failed to fetch user info");
+      return res.json();
     })
-      .then(async (res) => {
-        if (!res.ok) throw new Error("Failed to fetch user info");
-        return res.json();
-      })
-      .then((user) => {
-        navigate("/patient/dashboard", { replace: true });
-      })
-      .catch(() => navigate("/login", { replace: true }))
-      .finally(() => setLoading(false));
-  }, [navigate]);
+    .then(async (user) => {
+      await login(token, user);
+    })
+    .catch(() => {
+      navigate("/login", { replace: true });
+    })
+    .finally(() => setLoading(false));
+}, [navigate, login]);
 
   return (
     <div className="min-h-screen flex items-center justify-center">
