@@ -18,7 +18,7 @@ import {
   Bot,
 } from 'lucide-react';
 
-const IndustryChatbot = () => {
+const FloatingChatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(() =>
     window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
@@ -352,4 +352,4 @@ const IndustryChatbot = () => {
   );
 };
 
-export default IndustryChatbot;
+export default FloatingChatbot;
