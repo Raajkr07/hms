@@ -17,12 +17,12 @@ import { NavLink } from 'react-router-dom';
 const links = [
   { name: 'Dashboard', url: '/patient/dashboard', icon: <IconDashboard stroke={1.5} /> },
   { name: 'Profile', url: '/patient/profile', icon: <IconUserCircle stroke={1.5} /> },
-  { name: 'Book Appointment', url: '/patient/bookappointment', icon: <IconCalendarBolt stroke={1.5} /> },
+  { name: 'Appointment', url: '/patient/appointment', icon: <IconCalendarBolt stroke={1.5} /> },
   { name: 'Donate Money', url: '/patient/money', icon: <IconCurrencyRupee stroke={1.5} /> },
   { name: 'Donate Medicine', url: '/patient/donate', icon: <IconMedicineSyrup stroke={1.5} /> },
   { name: 'Requests Medicine', url: '/patient/request', icon: <IconClipboardHeart stroke={1.5} /> },
-  { name: 'Locations', url: '/patient/locations', icon: <IconPackage stroke={1.5} /> },
-  { name: 'Setting', url: '/patient/settings', icon: <IconSettings stroke={1.5} /> },
+  { name: 'Locations', url: '/patient/location', icon: <IconPackage stroke={1.5} /> },
+  { name: 'Setting', url: '/patient/setting', icon: <IconSettings stroke={1.5} /> },
 ];
 
 const UserSidebar = ({ collapsed, onMouseEnter, onMouseLeave, onScroll, freezeScroll = false }) => {
