@@ -16,13 +16,12 @@ import { NavLink } from 'react-router-dom';
 
 const links = [
   { name: 'Dashboard', url: '/doctor/dashboard', icon: <IconDashboard stroke={1.5} /> },
-  { name: 'Prescriptions', url: '/doctor/prescriptions', icon: <IconUsers stroke={1.5} /> },
-  { name: 'Donation Reviews', url: '/doctor/donations', icon: <IconClipboardList stroke={1.5} /> },
-  { name: 'Appointments', url: '/doctor/appointments', icon: <IconPackage stroke={1.5} /> },
-  { name: 'Notifications', url: '/doctor/notifications', icon: <IconBell stroke={1.5} /> },
-  { name: 'Analytics', url: '/doctor/analytics', icon: <IconChartBar stroke={1.5} /> },
   { name: 'Profile', url: '/doctor/profile', icon: <IconStethoscope stroke={1.5} /> },
-  { name: 'Settings', url: '/doctor/settings', icon: <IconSettings stroke={1.5} /> },
+  { name: 'Appointments', url: '/doctor/appointments', icon: <IconPackage stroke={1.5} /> },
+  { name: 'Donation Review', url: '/doctor/donations', icon: <IconClipboardList stroke={1.5} /> },
+  { name: 'Analytics', url: '/doctor/analytics', icon: <IconChartBar stroke={1.5} /> },
+  { name: 'Setting', url: '/doctor/setting', icon: <IconSettings stroke={1.5} /> },
+  { name: 'Meeting', url: '/doctor/meeting', icon: <IconUsers stroke={1.5} /> },
 ];
 
 const DoctorSidebar = ({ collapsed, onMouseEnter, onMouseLeave, onScroll, freezeScroll = false }) => {
@@ -81,7 +80,7 @@ const DoctorSidebar = ({ collapsed, onMouseEnter, onMouseLeave, onScroll, freeze
           {!collapsed && (
             <div className="text-center">
               <div className="text-neutral-900 dark:text-white font-medium text-sm no-underline">Raj Kumar</div>
-              <div className="text-neutral-600 dark:text-neutral-300 font-normal text-xs no-underline">Admin</div>
+              <div className="text-neutral-600 dark:text-neutral-300 font-normal text-xs no-underline">Doctor</div>
             </div>
           )}
         </div>
