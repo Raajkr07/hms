@@ -35,6 +35,14 @@ import SettingPage from '../account/users/pages/SettingPage';
 import UserMedicineDonationPageWrapper from '../account/users/wrapper/UserMedicineDonationPageWrapper';
 import OAuth2Success from '../components/auth/OAuth2Success';
 
+// Doctor Imports
+import DoctorProfile from '../account/doctor/pages/ProfilePage';
+import Appointments from '../account/doctor/pages/AppointmentPage';
+import Meeting from '../account/doctor/pages/MeetingPages';
+import Donations from '../account/doctor/pages/DonationReviewPage';
+import Analytics from '../account/doctor/pages/AnalyticsPage';
+import Setting from '../account/doctor/pages/SettingPage';
+
 const PageLoadingSpinner = () => (
   <div className="min-h-screen flex items-center justify-center bg-black">
     <div className="flex flex-col items-center">
@@ -43,23 +51,18 @@ const PageLoadingSpinner = () => (
     </div>
   </div>
 );
-
 const LazyWrapper = ({ children }) => (
   <Suspense fallback={<PageLoadingSpinner />}>
     {children}
   </Suspense>
 );
-
 const LogoutHandler = () => {
   const { logout } = useAuth();
-
   React.useEffect(() => {
     logout();
   }, [logout]);
-
   return <Navigate to="/" replace />;
 };
-
 const UnauthorizedPage = () => (
   <div className="min-h-screen flex items-center justify-center bg-black">
     <div className="text-center">
@@ -79,31 +82,26 @@ const UnauthorizedPage = () => (
     </div>
   </div>
 );
-
-// Redirect user to role-based dashboard
 const RoleBasedRedirect = () => {
   const { getUserRole, getRoleBasedPath } = useAuth();
   const userRole = getUserRole();
   const redirectPath = getRoleBasedPath(userRole);
-
   return <Navigate to={redirectPath} replace />;
 };
 
 const AppRoutes = () => {
   return (
     <Routes>
-      {/* Public Routes with instant load - no Suspense fallback */}
+      {/* Public Routes */}
       <Route path="/" element={<IndexPage />} />
       <Route element={<PublicRoute />}>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
       </Route>
-
-      {/* Password recovery routes */}
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/new-password" element={<NewPasswordPage />} />
 
-      {/* Legal, info and community routes - lazily loaded for performance */}
+      {/* Legal and Info Pages */}
       <Route path="/about" element={<LazyWrapper><AboutPage /></LazyWrapper>} />
       <Route path="/how-it-works" element={<LazyWrapper><HowItWorksPage /></LazyWrapper>} />
       <Route path="/impact" element={<LazyWrapper><ImpactPage /></LazyWrapper>} />
@@ -121,36 +119,44 @@ const AppRoutes = () => {
       <Route path="/sitemap" element={<LazyWrapper><SitemapPage /></LazyWrapper>} />
       <Route path="/oauth2/success" element={<OAuth2Success />} />
 
-      {/* Logout */}
+      {/* Logout and Unauthorized */}
       <Route path="/logout" element={<LogoutHandler />} />
-
-      {/* Unauthorized Access */}
       <Route path="/unauthorized" element={<UnauthorizedPage />} />
 
-      {/* Protected Routes with lazy loading */}
+      {/* Protected Routes */}
       <Route element={<PrivateRoute />}>
         <Route path="/dashboard" element={<RoleBasedRedirect />} />
 
+        {/* Admin */}
         <Route element={<AdminRoute />}>
           <Route path="/admin/*" element={<LazyWrapper><AdminDashboard /></LazyWrapper>} />
         </Route>
 
+        {/* Doctor */}
         <Route element={<DoctorRoute />}>
           <Route path="/doctor/*" element={<LazyWrapper><DoctorDashboard /></LazyWrapper>} />
+          <Route path="/doctor/profile" element={<LazyWrapper><DoctorProfile /></LazyWrapper>} />
+          <Route path="/doctor/appointments" element={<LazyWrapper><Appointments /></LazyWrapper>} />
+          <Route path="/doctor/meeting" element={<LazyWrapper><Meeting /></LazyWrapper>} />
+          <Route path="/doctor/donations" element={<LazyWrapper><Donations /></LazyWrapper>} />
+          <Route path="/doctor/analytics" element={<LazyWrapper><Analytics /></LazyWrapper>} />
+          <Route path="/doctor/setting" element={<LazyWrapper><Setting /></LazyWrapper>} />
         </Route>
 
+        {/* Patient/User */}
         <Route element={<RoleBasedRoute allowedRoles={['patient', 'doctor', 'admin']} />}>
           <Route path="/patient/*" element={<LazyWrapper><UserDashboard /></LazyWrapper>} />
           <Route path="/patient/profile" element={<LazyWrapper><UserProfile /></LazyWrapper>} />
-          <Route path="/patient/money" element={<UserMoneyDonationPage/>}></Route>
-          <Route path="/patient/appointment" element={<AppointmentPage/>}></Route>
+          <Route path="/patient/money" element={<UserMoneyDonationPage/>}/>
+          <Route path="/patient/appointment" element={<AppointmentPage/>}/>
           <Route path="/patient/donate" element={ <UserMedicineDonationPageWrapper selectedMode="donate" />} />
-          <Route path="/patient/request" element={ <UserMedicineDonationPageWrapper selectedMode="request" />}/></Route>
-          <Route path="/patient/location" element={<LocationPage/>}></Route>
-          <Route path="/patient/setting" element={<SettingPage/>}></Route>
+          <Route path="/patient/request" element={ <UserMedicineDonationPageWrapper selectedMode="request" />}/>
+          <Route path="/patient/location" element={<LocationPage/>}/>
+          <Route path="/patient/setting" element={<SettingPage/>}/>
         </Route>
+      </Route>
 
-      {/* Catch-all 404 redirect */}
+      {/* Catch-all 404 redirect: always LAST */}
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
