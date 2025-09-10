@@ -74,4 +74,5 @@ backend/build/
 
 # Ignore application.properties and application.yml with secrets url or APIs
 backend/user-service/src/main/resources/application.properties
+backend/payment-service/src/main/resources/application.properties
 backend/auth-service/src/main/resources/application.yml
