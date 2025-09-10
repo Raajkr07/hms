@@ -17,7 +17,7 @@ const OAuth2Success = () => {
     return;
   }
 
-  fetch("http://3.110.170.196:8080/api/auth/me", {
+  fetch("http://localhost:8080/api/auth/me", {
     method: "GET",
     headers: { Authorization: `Bearer ${token}` },
   })
