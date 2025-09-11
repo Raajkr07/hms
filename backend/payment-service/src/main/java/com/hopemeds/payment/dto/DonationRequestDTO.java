@@ -1,5 +1,6 @@
 package com.hopemeds.payment.dto;
 
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,8 +21,11 @@ import jakarta.validation.constraints.Pattern;
 @Builder
 public class DonationRequestDTO {
 
+    @Column(unique = true)
+    private String razorpayOrderId;
+
     @NotNull
-    @DecimalMin(value = "500.0", message = "Minimum donation amount is ₹500")
+    @DecimalMin(value = "1.0", message = "Minimum donation amount is ₹500")
     private Double amount;
 
     @NotBlank(message = "Full name is required")
