@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Modal, TextInput, Select, Button, ActionIcon, useMantineTheme } from '@mantine/core';
-import { IconX } from '@tabler/icons-react';
+import { Modal, TextInput, Button, useMantineTheme } from '@mantine/core';
 
 const ScrollModal = ({ opened, onClose }) => {
   const theme = useMantineTheme();
@@ -160,7 +159,7 @@ const ScrollModal = ({ opened, onClose }) => {
         onClose={onClose}
         withCloseButton={false}
         centered
-        size="45%"
+        size="37%"
         trapFocus={true}
         closeOnEscape={true}
         closeOnClickOutside={true}
@@ -220,13 +219,12 @@ const ScrollModal = ({ opened, onClose }) => {
                 {field === 'personName' && 'Person Name:'}
               </label>
               <TextInput
-                placeholder={`Enter ${
-                  field === 'contactNo'
+                placeholder={`Enter ${field === 'contactNo'
                     ? 'Contact Number'
                     : field === 'personName'
-                    ? 'Your Name'
-                    : field.charAt(0).toUpperCase() + field.slice(1)
-                }`}
+                      ? 'Your Name'
+                      : field.charAt(0).toUpperCase() + field.slice(1)
+                  }`}
                 value={formData[field]}
                 onFocus={() => setFocusedField(field)}
                 onBlur={() => setFocusedField(null)}
@@ -236,7 +234,7 @@ const ScrollModal = ({ opened, onClose }) => {
             </div>
           ))}
 
-          
+
 
           <Button
             type="submit"
