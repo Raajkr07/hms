@@ -36,6 +36,7 @@ public class PaymentServiceImpl implements PaymentService {
 
         // Save donation with pending payment
         Donation donation = Donation.builder()
+                .razorpayOrderId(order.get("id"))
                 .amount(donationRequest.getAmount())
                 .name(donationRequest.getName())
                 .email(donationRequest.getEmail())
@@ -47,11 +48,10 @@ public class PaymentServiceImpl implements PaymentService {
                 .donationDate(LocalDateTime.now())
                 .build();
 
-        donationRepository.save(donation);
+        Donation savedDonation = donationRepository.save(donation);
 
-        log.info("Created Razorpay order with id: ");
         return DonationResponseDTO.builder()
-                .donationId(donation.getId())
+                .donationId(savedDonation.getId())
                 .message(order.toString())
                 .build();
     }
