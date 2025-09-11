@@ -18,13 +18,15 @@ public class Donation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String razorpayOrderId;
+
     @Column(nullable = false)
     private Double amount;
 
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String email;
 
     @Column(nullable = false, length = 10)
