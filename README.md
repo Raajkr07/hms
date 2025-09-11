@@ -13,6 +13,9 @@
 ## Overview
 
 **HopeMeds** is a comprehensive platform enabling **medicine and money donations, healthcare access, and social impact** using a state-of-the-art **microservices architecture**. Built with Spring Boot microservices and a modern React + Vite frontend, HopeMeds empowers donors, patients, doctors, and administrators to collaborate for social good.
+---
+
+🌐 **Live Website:** [https://hopemeds.netlify.app/](https://hopemeds.netlify.app/)
 
 ---
 
@@ -88,8 +91,6 @@
 
 ## Screenshots
 
-*Add your screenshots here! Example structure below:*
-
 | Landing Page                  | Donation Page                | Admin Dashboard    |
 |-------------------------------|------------------------------|-------------------|
 | ![Landing]((https://drive.google.com/drive/folders/1TK0zG3EjJaoQe_QozGFcFYu8oBoE180f?usp=drive_link)) | ![Donation]((https://drive.google.com/drive/folders/1TK0zG3EjJaoQe_QozGFcFYu8oBoE180f?usp=drive_link)) | ![Admin]((https://drive.google.com/drive/folders/1TK0zG3EjJaoQe_QozGFcFYu8oBoE180f?usp=drive_link)) |
@@ -105,3 +106,4 @@ We welcome contributions! Please read guidelines or open an issue/pull request.
 ---
 
 *Made with ❤️ by Raajkr07.*
+
