@@ -13,6 +13,7 @@ import Testimonials from './testimonials/SaviourCard'
 import { testimonialsData } from '../../data/TestimonialData';
 import Button from './button/button';
 import NewInvite from './invite/NewInvite';
+import RequestMedicineFlow from './workflow/HowRequestMedicineWork';
 
 const IndexPage = () => {
   const { showModal, closeModal } = UseScrollModal();
@@ -36,6 +37,7 @@ const IndexPage = () => {
         <ThreeChartCarousel /> 
         <Testimonials testimonials={testimonialsData} />
         <Button/>
+        <RequestMedicineFlow />
         <NewsSection />
         <NewInvite />
         <Footer />
