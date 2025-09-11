@@ -7,6 +7,7 @@ import { HeartbeatLine } from '../../components/HeartBeatLine';
 import ImpactStories from './component/ImpactStories'
 import FundUtilization from './component/FundUtilization'
 import DonationComponent from './component/MoneyDonation';
+import { pricingPlans } from '../../data/DonationPageData';
 
 const donationAmounts = [500, 1000, 2500, 5000, 10000, 25000];
 
@@ -23,6 +24,7 @@ export default function MoneyDonatePage() {
     newsletter: true
   });
   const [currentStat, setCurrentStat] = useState(0);
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -54,7 +56,8 @@ export default function MoneyDonatePage() {
     return selectedPlan ? selectedPlan.amount : parseInt(customAmount) || 0;
   };
 
-  const handleSubmit = () => {
+  // Razorpay payment integration logic here
+  const processPayment = async () => {
     const amount = getSelectedAmount();
     if (amount < 100) {
       alert("Minimum amount ₹100");
@@ -64,10 +67,63 @@ export default function MoneyDonatePage() {
       alert("Please fill all required fields");
       return;
     }
-    // this section is for Payment integration here i will write this.
 
-    console.log("Processing donation:", { ...form, amount });
-    alert(`Thank you! i will implement payment gateway of ₹${amount.toLocaleString()}`);
+    try {
+      // Call backend to create Razorpay order
+      const response = await fetch('http://localhost:8081/api/payments/create-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amount, ...form }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Donation failed');
+      }
+
+      const resJson = await response.json();
+      const order = JSON.parse(resJson.message);
+
+      if (!window.Razorpay) {
+        alert('Razorpay SDK not loaded');
+        return;
+      }
+
+      // Setup Razorpay options
+      const options = {
+        key: import.meta.env.VITE_RAZORPAY_KEY,
+        amount: order.amount,
+        currency: order.currency,
+        order_id: order.id,
+        name: 'HopeMeds Donation',
+        description: 'Donate medicines and help community',
+        prefill: {
+          name: form.name,
+          email: form.email,
+          contact: form.mobile,
+        },
+        theme: { color: '#32a852' },
+        handler: function (paymentResult) {
+          alert('Donation successful! Thank you for your contribution.');
+          setPaymentSuccess(true);
+        },
+        modal: {
+          ondismiss: function () {
+            alert('Payment popup closed without payment.');
+          }
+        }
+      };
+
+      const rzp = new window.Razorpay(options);
+      rzp.open();
+
+      rzp.on('payment.failed', function (response) {
+        alert('Payment failed: ' + response.error.description);
+      });
+
+    } catch (error) {
+      alert('Error processing payment: ' + error.message);
+    }
   };
 
   return (
@@ -165,7 +221,21 @@ export default function MoneyDonatePage() {
         </div>
       </section>
 
-      <DonationComponent/>
+      {/* Donation Component with props */}
+      {!paymentSuccess ? (
+        <DonationComponent
+          plans={pricingPlans}
+          onSubmit={async (amount, formData) => {
+            setForm(formData);
+            setSelectedPlan({ amount });
+            await processPayment();
+          }}
+        />
+      ) : (
+        <div className="max-w-4xl mx-auto p-8 mt-20 text-center text-green-700 dark:text-green-300 text-2xl font-semibold">
+          Thank you for your donation.
+        </div>
+      )}
 
       {/* Impact Breakdown */}
       <section className="py-16 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-black dark:to-slate-800">
