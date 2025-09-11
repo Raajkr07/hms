@@ -145,7 +145,7 @@ const AppRoutes = () => {
 
         {/* Patient/User */}
         <Route element={<RoleBasedRoute allowedRoles={['patient', 'doctor', 'admin']} />}>
-          <Route path="/patient/*" element={<LazyWrapper><UserDashboard /></LazyWrapper>} />
+          <Route path="/patient/" element={<LazyWrapper><UserDashboard /></LazyWrapper>} />
           <Route path="/patient/profile" element={<LazyWrapper><UserProfile /></LazyWrapper>} />
           <Route path="/patient/money" element={<UserMoneyDonationPage/>}/>
           <Route path="/patient/appointment" element={<AppointmentPage/>}/>
