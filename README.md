@@ -8,7 +8,7 @@
 
 # HopeMeds: A Modern Medicine Donation & Healthcare Platform
 
-![HopeMeds](https://drive.google.com/file/d/1lruveH1Gj9Q9jQ52OTQhEwCitURLw_pX/view?usp=sharing)
+![HopeMeds Logo](https://drive.google.com/uc?export=view&id=1lruveH1Gj9Q9jQ52OTQhEwCitURLw_pX)
 
 ## Overview
 
@@ -93,7 +93,7 @@
 
 | Landing Page                  | Donation Page                | Admin Dashboard    |
 |-------------------------------|------------------------------|-------------------|
-| ![Landing](https://drive.google.com/file/d/1BN60LKCc_B6OWVtEUlJUnGT81iYRd4Va/view?usp=sharing) | ![Donation]((https://drive.google.com/drive/folders/1TK0zG3EjJaoQe_QozGFcFYu8oBoE180f?usp=drive_link)) | ![Admin]((https://drive.google.com/drive/folders/1TK0zG3EjJaoQe_QozGFcFYu8oBoE180f?usp=drive_link)) |
+| ![Landing](https://drive.google.com/uc?export=view&id=abc123def456ghi789) | ![Donation]((https://drive.google.com/drive/folders/1TK0zG3EjJaoQe_QozGFcFYu8oBoE180f?usp=drive_link)) | ![Admin]((https://drive.google.com/drive/folders/1TK0zG3EjJaoQe_QozGFcFYu8oBoE180f?usp=drive_link)) |
 
 <!-- I will add more images later! -->
 
@@ -106,6 +106,7 @@ We welcome contributions! Please read guidelines or open an issue/pull request.
 ---
 
 *Made with ❤️ by Raajkr07.*
+
 
 
 
