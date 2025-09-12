@@ -17,21 +17,18 @@ const USER_ROLES = {
     label: 'Patient',
     icon: Heart,
     color: 'bg-blue-500',
-    description: 'Receive & donated medicines',
   },
   DOCTOR: {
     value: 'DOCTOR',
     label: 'Doctor',
     icon: Stethoscope,
     color: 'bg-green-500',
-    description: 'Verify medicine safety',
   },
   ADMIN: {
     value: 'ADMIN',
     label: 'Admin',
     icon: Shield,
     color: 'bg-purple-500',
-    description: 'Manage distribution network',
   }
 };
 
@@ -287,10 +284,10 @@ export default function SignupCard({ isFlipped, setIsFlipped }) {
                 type="button"
                 aria-label={isFlipped ? "Back to Signup" : "Swap"}
                 onClick={() => setIsFlipped(f => !f)}
-                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 w-20 h-20 rounded-full bg-teal-600 text-white font-bold text-lg shadow-lg flex items-center justify-center"
+                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 w-20 h-20 rounded-full bg-primary-800/30 text-gray-500 font-bold text-lg shadow-lg flex items-center justify-center"
                 style={{ zIndex: 50 }}
             >
-                Swap
+                or
             </button>
 
             <div className="w-full relative" style={{ minHeight: 420 }}>
@@ -303,9 +300,8 @@ export default function SignupCard({ isFlipped, setIsFlipped }) {
                 >
                     {/* Form Header */}
                     <div className="text-center mb-6">
-                        <h2 className="text-3xl font-extrabold text-primary-400 mb-2">Join HopeMeds</h2>
+                        <h2 className="text-3xl font-extrabold text-primary-400 mb-2 mt-0">Join HopeMeds</h2>
                         <h3 className="text-xl font-medium text-gray-600 mb-4">Help reduce medicine <span className='text-[#FACC15]'>waste</span></h3>
-                        <p className="text-gray-500 text-sm">Create an account to start helping others</p>
                     </div>
 
                     {/* Error Message */}
