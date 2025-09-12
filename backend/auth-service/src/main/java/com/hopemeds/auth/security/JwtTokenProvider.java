@@ -1,59 +1,78 @@
 package com.hopemeds.auth.security;
 
-import com.hopemeds.auth.config.JwtConfig;
 import io.jsonwebtoken.*;
-import io.jsonwebtoken.security.Keys;
+import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
+import com.hopemeds.auth.config.JwtConfig;
 
-import javax.crypto.SecretKey;
+import java.security.Key;
 import java.util.Date;
+import java.util.List;
 
 @Component
 public class JwtTokenProvider {
 
     private final JwtConfig jwtConfig;
+    private Key key;
 
     public JwtTokenProvider(JwtConfig jwtConfig) {
         this.jwtConfig = jwtConfig;
     }
 
-    private SecretKey getSigningKey() {
-        return Keys.hmacShaKeyFor(jwtConfig.getJwtSecret().getBytes());
+    @PostConstruct
+    public void init() {
+        key = jwtConfig.getSigningKey();
     }
 
-    public String generateToken(String userId) {
+    // Always require userId, email, and roles
+    public String generateToken(String userId, String email, List<String> roles) {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + jwtConfig.getJwtExpirationMs());
 
         return Jwts.builder()
                 .setSubject(userId)
+                .claim("email", email)
+                .claim("roles", roles)
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
-                .signWith(getSigningKey(), SignatureAlgorithm.HS512)
+                .signWith(key, jwtConfig.getSignatureAlgorithm())
                 .compact();
+    }
+
+    public boolean validateToken(String token) {
+        try {
+            Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
+            return true;
+        } catch (JwtException | IllegalArgumentException ex) {
+            return false;
+        }
     }
 
     public String getUserIdFromJWT(String token) {
         Claims claims = Jwts.parserBuilder()
-                .setSigningKey(getSigningKey())
+                .setSigningKey(key)
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
-
         return claims.getSubject();
     }
 
-    public boolean validateToken(String authToken) {
-        try {
-            Jwts.parserBuilder().setSigningKey(getSigningKey()).build().parseClaimsJws(authToken);
-            return true;
-        } catch (JwtException | IllegalArgumentException e) {
-            System.err.println("Invalid JWT token: " + e.getMessage());
-        }
-        return false;
+    public String getEmailFromJWT(String token) {
+        Claims claims = Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+        return claims.get("email", String.class);
     }
 
-    public long getJwtExpirationMs() {
-        return jwtConfig.getJwtExpirationMs();
+    @SuppressWarnings("unchecked")
+    public List<String> getRolesFromJWT(String token) {
+        Claims claims = Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+        return claims.get("roles", List.class);
     }
 }
