@@ -1,59 +1,54 @@
 package com.hopemeds.auth.security;
 
+import com.hopemeds.auth.entity.MyOAuth2User;
+import com.hopemeds.auth.entity.OAuth2UserEntity;
 import com.hopemeds.auth.entity.Role;
-import com.hopemeds.auth.entity.User;
-import com.hopemeds.auth.repository.UserRepository;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import com.hopemeds.auth.repository.OAuth2UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
-import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 @Service
 public class SocialOAuth2UserService extends DefaultOAuth2UserService {
+    private static final Logger logger = LoggerFactory.getLogger(SocialOAuth2UserService.class);
 
-    private final UserRepository userRepository;
+    private final OAuth2UserRepository oauth2UserRepository;
 
-    public SocialOAuth2UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public SocialOAuth2UserService(OAuth2UserRepository oauth2UserRepository) {
+        this.oauth2UserRepository = oauth2UserRepository;
     }
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2User oAuth2User = super.loadUser(userRequest);
-
         Map<String, Object> attributes = oAuth2User.getAttributes();
+
         String email = (String) attributes.get("email");
         if (email == null || email.isEmpty()) {
             throw new OAuth2AuthenticationException("Email not found from OAuth2 provider");
         }
 
-        User user = userRepository.findByEmail(email).orElseGet(() -> {
-            User newUser = User.builder()
-                    .id(UUID.randomUUID().toString())
+        // Load or create new entity
+        OAuth2UserEntity entity = oauth2UserRepository.findByEmail(email).orElseGet(() -> {
+            OAuth2UserEntity newUser = OAuth2UserEntity.builder()
                     .email(email)
-                    .fullName((String) attributes.getOrDefault("name", "Unknown User"))
+                    .name((String) attributes.getOrDefault("name", "Unknown User"))
                     .role(Role.PATIENT)
-                    .password("")
                     .build();
-            return userRepository.save(newUser);
+            return oauth2UserRepository.save(newUser);
         });
 
-        List<SimpleGrantedAuthority> authorities = Collections.singletonList(
-                new SimpleGrantedAuthority(user.getRole().name())
-        );
-
-        return new DefaultOAuth2User(
-                authorities,
-                attributes,
-                "email"
-        );
+        return MyOAuth2User.builder()
+                .id(String.valueOf(entity.getId()))
+                .email(entity.getEmail())
+                .fullName(entity.getName())
+                .role(entity.getRole())
+                .build();
     }
 }
