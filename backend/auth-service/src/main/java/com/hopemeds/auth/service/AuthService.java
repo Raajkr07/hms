@@ -7,17 +7,20 @@ import com.hopemeds.auth.entity.Role;
 import com.hopemeds.auth.entity.User;
 import com.hopemeds.auth.repository.UserRepository;
 import com.hopemeds.auth.security.JwtTokenProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 
 @Service
 public class AuthService {
 
+    private static final Logger logger = LoggerFactory.getLogger(AuthService.class);
+
     private final UserRepository userRepository;
-    private final AuthenticationManager authenticationManager;
     private final JwtTokenProvider tokenProvider;
     private final PasswordEncoder passwordEncoder;
 
@@ -26,25 +29,36 @@ public class AuthService {
                        JwtTokenProvider tokenProvider,
                        PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
-        this.authenticationManager = authenticationManager;
         this.tokenProvider = tokenProvider;
         this.passwordEncoder = passwordEncoder;
     }
 
     public JwtResponse authenticateUser(LoginRequest loginRequest) {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
+        logger.debug("Authenticating user with email: {}", loginRequest.getEmail());
 
         User user = userRepository.findByEmail(loginRequest.getEmail())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> {
+                    return new RuntimeException("User not found");
+                });
 
-        String token = tokenProvider.generateToken(user.getId());
+        if (!passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
+            throw new RuntimeException("Invalid credentials");
+        }
+        String token = tokenProvider.generateToken(
+                user.getId(),
+                user.getEmail(),
+                List.of(user.getRole().name())
+        );
+        logger.debug("JWT token generated for user {}", user.getEmail());
 
-        return new JwtResponse(token, user.getId(), user.getEmail(), user.getFullName(), user.getRole().name());
+
+        return new JwtResponse(token, user.getId(), user.getEmail(), user.getFullName(), user.getRole().name().toLowerCase());
     }
 
     public User registerUser(SignupRequest signUpRequest) {
+        logger.debug("Registering user with email: {}", signUpRequest.getEmail());
         if (userRepository.existsByEmail(signUpRequest.getEmail())) {
+            logger.error("Email already in use: {}", signUpRequest.getEmail());
             throw new RuntimeException("Email already in use");
         }
 
@@ -56,6 +70,8 @@ public class AuthService {
                 .role(signUpRequest.getRole() != null ? signUpRequest.getRole() : Role.PATIENT)
                 .build();
 
-        return userRepository.save(user);
+        User savedUser = userRepository.save(user);
+        logger.info("User registered successfully: {}", savedUser.getEmail());
+        return savedUser;
     }
 }
