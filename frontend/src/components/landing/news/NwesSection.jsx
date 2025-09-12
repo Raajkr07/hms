@@ -1,7 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react';
 
 const NEWS_API_KEY = import.meta.env.VITE_NEWS_API_KEY;
+
+// News API.org
 const NEWS_API_URL = `https://newsapi.org/v2/everything?qInTitle=medicine+OR+donation+OR+healthcare&language=en&sortBy=publishedAt&pageSize=8&apiKey=${NEWS_API_KEY}`;
+
+// The News API
+// const NEWS_API_URL = `https://api.thenewsapi.com/v1/news/all?api_token=${NEWS_API_KEY}&language=en&headlines_per_category=8&include_similar=false`;
 
 export default function NewsSection() {
   const [articles, setArticles] = useState([]);
@@ -18,6 +23,7 @@ export default function NewsSection() {
         const data = await response.json();
         if (data.status === 'ok') {
           setArticles(data.articles);
+          // setArticles(data.data);
         } else {
           setError('Failed to fetch news');
         }
