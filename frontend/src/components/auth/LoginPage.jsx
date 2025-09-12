@@ -178,26 +178,7 @@ export default function LoginPage() {
             <h2 className="text-5xl font-extrabold leading-tight">
               Reducing Medicine <span className='text-[#FACC15]'>waste</span>, Saving Lives.
             </h2>
-            <div className="space-y-4 text-teal-100 max-w-md">
-              <div className="flex items-center space-x-3">
-                <Heart className="w-6 h-6 text-blue-300" />
-                <span className="text-base">
-                  Patients - Find affordable medicines and connect with NGOs
-                </span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <Stethoscope className="w-6 h-6 text-green-300" />
-                <span className="text-base">
-                  Doctors - Verify medicine quality and approve donations
-                </span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <Shield className="w-6 h-6 text-purple-300" />
-                <span className="text-base">
-                  Admins - Oversee distribution network and partnerships
-                </span>
-              </div>
-            </div>
+            
           </section>
         </section>
 
@@ -209,7 +190,6 @@ export default function LoginPage() {
               <h3 className="text-lg md:text-xl font-medium text-gray-600 mb-3 md:mb-4">
                 Sign in to your account
               </h3>
-              <p className="text-gray-500 text-xs md:text-sm">Enter your credentials to continue</p>
             </div>
             {errors.submit && (
               <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-xs md:text-sm">
@@ -314,7 +294,7 @@ export default function LoginPage() {
                   <div className="w-full border-t border-gray-300" />
                 </div>
                 <div className="relative flex justify-center text-xs md:text-sm">
-                  <span className="px-2 bg-white text-gray-500">Or continue with</span>
+                  <span className="px-2 bg-white text-gray-500">Or</span>
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-2 md:gap-3 mt-0">
