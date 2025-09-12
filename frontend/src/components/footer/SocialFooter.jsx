@@ -34,7 +34,7 @@ export default function Footer() {
     <footer className="w-full border-t px-4">
       <Container
         size="lg"
-        className="flex flex-col md:flex-row items-center justify-between py-6 gap-y-4 md:gap-y-0"
+        className="flex flex-col md:flex-row items-center justify-between pt-6 pb-2 gap-y-4 md:gap-y-0"
       >
         <Text
           className={`text-sm sm:text-base text-center md:text-left text-white`}
