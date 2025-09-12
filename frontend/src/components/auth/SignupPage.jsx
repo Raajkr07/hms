@@ -12,7 +12,7 @@ export default function SignupPage() {
       <div className="absolute top-20 right-20 w-64 h-64 bg-white opacity-5 rounded-full"></div>
       <div className="absolute bottom-32 left-10 w-32 h-32 bg-white opacity-5 rounded-full"></div>
 
-      <div className="flex-1 pt-4 pl-6 flex flex-col justify-between">
+      <div className="hidden md:flex flex-col flex-1 pt-4 pl-6 justify-between text-white max-w-lg">
         <div className="flex gap-2 items-center blinking-shine">
           <IconHeartbeat size={40} stroke={2.5} className="text-primary-200" />
           <span className="font-heading text-3xl font-semibold text-primary-200">HopeMeds</span>
@@ -20,10 +20,7 @@ export default function SignupPage() {
 
         <div className="text-white max-w-lg">
           <h1 className="text-5xl font-bold leading-tight mb-6">Reducing Medicine <span className='text-[#FACC15]'>waste</span>, Saving Lives.</h1>
-          <p className="text-xl text-teal-100 leading-relaxed mb-8">
-            Connect unused medicines with those who need them most. Join our mission to eliminate medicine wastage and
-            make healthcare accessible to everyone.
-          </p>
+          
           <div className="space-y-4">
             <div className="flex items-center space-x-3">
               <Heart className="w-6 h-6 text-blue-300" />
@@ -40,10 +37,12 @@ export default function SignupPage() {
           </div>
         </div>
 
-        <div className="text-teal-200 text-sm">© 2025 HopeMeds. Fighting medicine wastage together.</div>
+        <div className="text-teal-200 text-sm">© 2025 HopeMeds. Fighting medicine <span className='text-[#FACC15]'>wastage</span> together.</div>
       </div>
 
-      <SignupCard isFlipped={isFlipped} setIsFlipped={setIsFlipped} />
+       <div className="flex-1 flex items-center justify-end px-4 py-8 md:py-0">
+        <SignupCard isFlipped={isFlipped} setIsFlipped={setIsFlipped} />
+      </div>
     </div>
   );
 }
