@@ -27,9 +27,8 @@ const links = [
   { name: 'Locations', url: '/admin/locations', icon: <IconMapPin stroke={1.5} /> },
   { name: 'Partners', url: '/admin/partners', icon: <IconBuildingCommunity stroke={1.5} /> },
   { name: 'Payments', url: '/admin/payments', icon: <IconCreditCard stroke={1.5} /> },
-  { name: 'Notifications', url: '/admin/notifications', icon: <IconBell stroke={1.5} /> },
   { name: 'Analytics', url: '/admin/analytics', icon: <IconChartBar stroke={1.5} /> },
-  { name: 'Settings', url: '/admin/settings', icon: <IconSettings stroke={1.5} /> },
+  { name: 'Setting', url: '/admin/setting', icon: <IconSettings stroke={1.5} /> },
 ];
 
 const AdminSidebar = ({ collapsed, onMouseEnter, onMouseLeave, onScroll, freezeScroll = false }) => {
