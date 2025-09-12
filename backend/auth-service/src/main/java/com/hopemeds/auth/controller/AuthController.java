@@ -77,8 +77,6 @@ public class AuthController {
         return ResponseEntity.ok(new OtpVerifyResponse("OTP verified", resetToken.getToken(), true));
     }
 
-
-
     @PostMapping("/forgot-password")
     public ResponseEntity<?> forgotPassword(@Valid @RequestBody ForgotPasswordRequest request) {
         // Send generic success to prevent user enumeration
