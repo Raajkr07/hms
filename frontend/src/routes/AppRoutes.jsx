@@ -31,9 +31,12 @@ import UserMoneyDonationPage from '../account/users/pages/MoneyDonationPage';
 import UserProfile from '../account/users/pages/ProfilePage';
 import AppointmentPage from '../account/users/pages/AppointmentPage';
 import LocationPage from '../account/users/pages/LocationPage';
-import SettingPage from '../account/users/pages/SettingPage';
+import UserSettingPage from '../account/users/pages/SettingPage';
 import UserMedicineDonationPageWrapper from '../account/users/wrapper/UserMedicineDonationPageWrapper';
 import OAuth2Success from '../components/auth/OAuth2Success';
+
+// admin Imports
+import AdminSettingPage from '../account/admin/pages/SettingPage';
 
 // Doctor Imports
 import DoctorProfile from '../account/doctor/pages/ProfilePage';
@@ -41,7 +44,7 @@ import Appointments from '../account/doctor/pages/AppointmentPage';
 import Meeting from '../account/doctor/pages/MeetingPages';
 import Donations from '../account/doctor/pages/DonationReviewPage';
 import Analytics from '../account/doctor/pages/AnalyticsPage';
-import Setting from '../account/doctor/pages/SettingPage';
+import DoctorSettingPage from '../account/doctor/pages/SettingPage';
 
 const PageLoadingSpinner = () => (
   <div className="min-h-screen flex items-center justify-center bg-black">
@@ -130,6 +133,7 @@ const AppRoutes = () => {
         {/* Admin */}
         <Route element={<AdminRoute />}>
           <Route path="/admin/*" element={<LazyWrapper><AdminDashboard /></LazyWrapper>} />
+          <Route path="/admin/setting" element={<LazyWrapper><AdminSettingPage /></LazyWrapper>} />
         </Route>
 
         {/* Doctor */}
@@ -140,7 +144,7 @@ const AppRoutes = () => {
           <Route path="/doctor/meeting" element={<LazyWrapper><Meeting /></LazyWrapper>} />
           <Route path="/doctor/donations" element={<LazyWrapper><Donations /></LazyWrapper>} />
           <Route path="/doctor/analytics" element={<LazyWrapper><Analytics /></LazyWrapper>} />
-          <Route path="/doctor/setting" element={<LazyWrapper><Setting /></LazyWrapper>} />
+          <Route path="/doctor/setting" element={<LazyWrapper><DoctorSettingPage /></LazyWrapper>} />
         </Route>
 
         {/* Patient/User */}
@@ -152,7 +156,7 @@ const AppRoutes = () => {
           <Route path="/patient/donate" element={ <UserMedicineDonationPageWrapper selectedMode="donate" />} />
           <Route path="/patient/request" element={ <UserMedicineDonationPageWrapper selectedMode="request" />}/>
           <Route path="/patient/location" element={<LocationPage/>}/>
-          <Route path="/patient/setting" element={<SettingPage/>}/>
+          <Route path="/patient/setting" element={<UserSettingPage/>}/>
         </Route>
       </Route>
 
