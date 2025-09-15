@@ -128,7 +128,7 @@ export default function MedicineWasteArticle() {
 
   return (
     <main
-      className="relative max-w-7xl mx-auto p-10 rounded-2xl bg-gradient-to-r from-white to-white dark:from-black dark:to-black font-serif"
+      className="relative max-w-7xl mx-0 lg:mx-72 p-10 rounded-2xl bg-gradient-to-r from-white to-white dark:from-black dark:to-black font-serif"
       role="main"
     >
       <motion.div
